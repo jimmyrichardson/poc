@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squiggly Squares</title>
+  <link rel="stylesheet" href="./src/styles/styles.css">
+</head>
+
+<body>
+  <section class="hero">
+    <h1>Design and dev house</h1>
+  </section>
+  <figure class="figure">
+
+    <svg class="line left" width="200" height="540">
+      <defs>
+        <clipPath id="leftClip">
+          <rect x="0" y="0" width="100" height="540" />
+        </clipPath>
+        <clipPath id="rightClip">
+          <rect x="100" y="0" width="100" height="540" />
+        </clipPath>
+      </defs>
+      <path id="leftPath" fill="var(--color-orange)" stroke="#1E1E1E" stroke-width="2" clip-path="url(#leftClip)" />
+      <path id="rightPath" fill="var(--color-white)" stroke="#1E1E1E" stroke-width="2" clip-path="url(#rightClip)" />
+    </svg>
+
+    <!-- <svg class="line left" width="200" height="540">
+      <defs>
+        <linearGradient id="splitFill" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="49.9%" stop-color="var(--color-orange)" />
+          <stop offset="50%" stop-color="var(--color-white)" />
+          <stop offset="100%" stop-color="var(--color-white)" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#splitFill)" stroke="#1E1E1E" stroke-width="2" />
+    </svg> -->
+
+    <svg class="line bottom" width="540" height="200">
+      <defs>
+        <linearGradient id="splitFill2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="49.9%" stop-color="var(--color-white)" />
+          <stop offset="50%" stop-color="var(--color-orange)" />
+          <stop offset="100%" stop-color="var(--color-orange)" />
+        </linearGradient>
+      </defs>
+      <path class="path-gradient" fill="url(#splitFill2)" stroke="#1E1E1E" stroke-width="2" />
+    </svg>
+  </figure>
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+.line {
+  position: absolute;
+
+  &.left {
+    top: 0;
+    height: 100%;
+    left: -100px;
+  }
+
+  &.bottom {
+    left: 0;
+    width: 100%;
+    bottom: -100px;
+  }
+}

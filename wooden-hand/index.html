@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js GLB Model Loader</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    h1 {
+      font-size: 72px;
+      z-index: 0;
+      position: absolute;
+      left: 3rem;
+      top: 2rem;
+      font-family: 'Arial', sans-serif;
+    }
+
+    menu {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      font-size: 18px;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid black;
+    }
+
+    button:hover {
+      background-color: white;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <menu>
+    <button id="emote-1">Emote 1</button>
+    <button id="emote-2">Emote 2</button>
+    <button id="emote-3">Emote 3</button>
+  </menu>
+  <!-- Import GSAP -->
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <!-- Import Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+  <!-- Import the GLTFLoader -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <script>
+    // Basic setup: Scene, Camera, and Renderer
+    const scene = new THREE.Scene();
+    const aspect = window.innerWidth / window.innerHeight;
+    const camera = new THREE.OrthographicCamera(-aspect * 10, aspect * 10, 10, -10, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+
+    // Set the background color of the scene to white
+    scene.background = new THREE.Color(0xffffff);
+
+    // Instantiate the GLTFLoader
+    const loader = new THREE.GLTFLoader();
+
+    // Add lighting for the MeshToonMaterial
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(-10, 8, 12).normalize();
+    scene.add(light);
+
+    var model, fingerGroup;
+
+    loader.load(
+      'public/wooden-art-hand.v3.glb',
+      (gltf) => {
+        model = gltf.scene;
+        scene.add(model);
+        console.dir(model);
+        model.scale.set(1.5, 1.5, 1.5);
+        model.position.set(0, -6, 0);
+
+        // closeFist(model);
+
+        // Add event listeners to the buttons
+        document.getElementById('emote-1').addEventListener('click', () => {
+          emote1(model);
+        });
+
+        document.getElementById('emote-2').addEventListener('click', () => {
+          emote2(model);
+        });
+
+        document.getElementById('emote-3').addEventListener('click', () => {
+          emote3(model);
+        });
+
+
+      },
+      (xhr) => {
+        console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+      },
+      (error) => {
+        console.error('An error happened', error);
+      }
+    );
+
+
+
+    function closeFist(model) {
+      // Get the armature/bones dynamically
+      let bones = [];
+
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('finger')) {
+          bones.push(object);
+        }
+      });
+
+      // Animate Bone Rotation with GSAP
+      bones.forEach(bone => {
+        let intensity = 2; // Define an intensity variable
+        let rotationZ = (Math.PI / -7) * intensity; // Default rotation
+        if (bone.name.includes('02')) {
+          rotationZ = (Math.PI / -5) * intensity; // Rotate farther for "02"
+        } else if (bone.name.includes('03')) {
+          rotationZ = (Math.PI / -3) * intensity; // Rotate even farther for "03"
+        }
+        gsap.to(bone.rotation, {
+          z: rotationZ,
+          duration: 0.5,
+          yoyo: true,
+          repeat: -1, // Infinite loop
+          ease: 'power2.inOut'
+        });
+      });
+
+      // Animate Thumb Bone Rotation with GSAP
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('thumb_01') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -8; // Default rotation for thumb_01
+
+          gsap.to(object.rotation, {
+            x: -rotationZ,
+            duration: 0.5,
+            yoyo: true,
+            repeat: -1, // Infinite loop
+            ease: 'power2.inOut'
+          });
+        }
+
+        if (object.isBone && object.name.includes('thumb_02') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -6; // More intense rotation for thumb_02
+
+          gsap.to(object.rotation, {
+            x: -rotationZ,
+            duration: 0.5, // Slightly longer duration for smoother animation
+            yoyo: true,
+            repeat: -1, // Infinite loop
+            ease: 'power2.inOut'
+          });
+        }
+      });
+    }
+
+
+    function emote1(model) {
+      // Get the armature/bones dynamically
+      let bones = [];
+
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('finger')) {
+          bones.push(object);
+        }
+      });
+
+      // Animate Bone Rotation with GSAP
+      bones.forEach(bone => {
+        let intensity = 1.5; // Define an intensity variable
+        let rotationZ = (Math.PI / -6) * intensity; // Default rotation
+        if (bone.name.includes('02')) {
+          rotationZ = (Math.PI / -4) * intensity; // Rotate farther for "02"
+        } else if (bone.name.includes('03')) {
+          rotationZ = (Math.PI / -2.5) * intensity; // Rotate even farther for "03"
+        }
+        gsap.to(bone.rotation, {
+          z: rotationZ,
+          duration: 0.5,
+          yoyo: true,
+          repeat: 1, // Infinite loop
+          repeatDelay: 0.2,
+          ease: 'power2.inOut'
+        });
+      });
+
+      // Animate Thumb Bone Rotation with GSAP
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('thumb_01') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -7; // Default rotation for thumb_01
+
+          gsap.to(object.rotation, {
+            x: -rotationZ,
+            duration: 0.5,
+            yoyo: true,
+            repeat: 1, // Infinite loop
+            repeatDelay: 0.2,
+            ease: 'power2.inOut'
+          });
+        }
+
+        if (object.isBone && object.name.includes('thumb_02') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -5; // More intense rotation for thumb_02
+
+          gsap.to(object.rotation, {
+            x: -rotationZ,
+            duration: 0.5, // Slightly longer duration for smoother animation
+            yoyo: true,
+            repeat: 1, // Infinite loop
+            repeatDelay: 0.2,
+            ease: 'power2.inOut'
+          });
+        }
+      });
+    }
+
+
+    function emote2(model) {
+      // Get the armature/bones dynamically
+      let bones = [];
+
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('finger') && !object.name.includes('index') && !object.name.includes('middle')) {
+          bones.push(object);
+        }
+      });
+
+      // Animate Bone Rotation with GSAP
+      bones.forEach(bone => {
+        let intensity = 1.5; // Define an intensity variable
+        let rotationZ = (Math.PI / -6) * intensity; // Default rotation
+        if (bone.name.includes('02')) {
+          rotationZ = (Math.PI / -4) * intensity; // Rotate farther for "02"
+        } else if (bone.name.includes('03')) {
+          rotationZ = (Math.PI / -2.5) * intensity; // Rotate even farther for "03"
+        }
+        gsap.to(bone.rotation, {
+          z: rotationZ,
+          duration: 0.5,
+          yoyo: true,
+          repeat: 1, // Infinite loop
+          repeatDelay: 0.2,
+          ease: 'power2.inOut'
+        });
+      });
+
+      // Animate Thumb Bone Rotation with GSAP
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('thumb_01') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -4; // Default rotation for thumb_01
+
+          gsap.to(object.rotation, {
+            x: -rotationZ,
+            duration: 0.5,
+            yoyo: true,
+            repeat: 1, // Infinite loop
+            repeatDelay: 0.2,
+            ease: 'power2.inOut'
+          });
+        }
+
+        if (object.isBone && object.name.includes('thumb_02') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -5; // More intense rotation for thumb_02
+
+          gsap.to(object.rotation, {
+            x: -rotationZ,
+            duration: 0.5, // Slightly longer duration for smoother animation
+            yoyo: true,
+            repeat: 1, // Infinite loop
+            repeatDelay: 0.2,
+            ease: 'power2.inOut'
+          });
+        }
+      });
+    }
+
+
+    function emote3(model) {
+      // Get the armature/bones dynamically
+      let bones = [];
+
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('finger') && !object.name.includes('pinky')) {
+          bones.push(object);
+        }
+      });
+
+      // Animate Bone Rotation with GSAP
+      bones.forEach(bone => {
+        let intensity = 1.5; // Define an intensity variable
+        let rotationZ = (Math.PI / -6) * intensity; // Default rotation
+        if (bone.name.includes('02')) {
+          rotationZ = (Math.PI / -4) * intensity; // Rotate farther for "02"
+        } else if (bone.name.includes('03')) {
+          rotationZ = (Math.PI / -2.5) * intensity; // Rotate even farther for "03"
+        }
+        gsap.to(bone.rotation, {
+          z: rotationZ,
+          duration: 0.5,
+          yoyo: true,
+          repeat: 1, // Infinite loop
+          repeatDelay: 0.2,
+          ease: 'power2.inOut'
+        });
+      });
+
+      // Animate Thumb Bone Rotation with GSAP
+      model.traverse((object) => {
+        if (object.isBone && object.name.includes('thumb_01') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -18; // Slight outward rotation for thumb_01
+
+          gsap.to(object.rotation, {
+            x: rotationZ,
+            duration: 0.5,
+            yoyo: true,
+            repeat: 1,
+            repeatDelay: 0.2,
+            ease: 'power2.inOut'
+          });
+        }
+
+        if (object.isBone && object.name.includes('thumb_02') && !object.name.includes('palm')) {
+          let rotationZ = Math.PI / -16; // Slight outward rotation for thumb_02
+
+          gsap.to(object.rotation, {
+            x: rotationZ,
+            duration: 0.5,
+            yoyo: true,
+            repeat: 1,
+            repeatDelay: 0.2,
+            ease: 'power2.inOut'
+          });
+        }
+      });
+
+    }
+
+
+    // Set camera position and rotation for bird's eye view
+    camera.position.set(4, 4, -3);
+    camera.lookAt(0, 0, 0);
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const aspect = window.innerWidth / window.innerHeight;
+      camera.left = -aspect * 10;
+      camera.right = aspect * 10;
+      camera.top = 10;
+      camera.bottom = -10;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Add orbit controls to rotate the camera on click and drag
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // Enable damping (inertia)
+    controls.dampingFactor = 0.25; // Damping factor
+    controls.screenSpacePanning = false; // Disable panning
+    controls.maxPolarAngle = Math.PI / 2; // Limit vertical rotation
+    controls.enableInertia = true; // Enable inertia effect
+    controls.inertiaFactor = 0.1; // Inertia factor
+
+    // Update controls in the animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update(); // Update controls
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+</body>
+
+</html>

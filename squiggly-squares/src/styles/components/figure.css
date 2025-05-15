@@ -1,0 +1,8 @@
+.figure {
+  background: repeating-linear-gradient(0deg,
+      var(--color-orange),
+      var(--color-orange) 3px,
+      #cd892a 3px,
+      #cd892a 6px);
+  position: relative;
+}
