@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:root": "vite build",
+    "build": "vite build",
     "build:image-depth-parallax": "vite build --config ./image-depth-parallax/vite.config.js",
     "build:line-displacement": "vite build --config ./line-displacement/vite.config.js",
     "preview": "vite preview"
