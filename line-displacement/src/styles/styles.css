@@ -1,47 +1,5 @@
 /**/
-@import url('./util/normalize.css');
-@import url('./util/fonts.css');
-@import url('./util/type.css');
-
-/**/
-@import url('./global/layout.css');
+@import url('../../../dist/assets/main.css');
 
 /**/
 @import url('./components/button.css');
-
-:root {
-  --color-primary: #1E1E1E;
-  --color-secondary: #FAF6F3;
-  --color-accent: #DC942F;
-  --color-background: #FAF6F3;
-  --color-text: #1E1E1E;
-  --color-white: #FAF6F3;
-  --color-black: #1E1E1E;
-  --color-orange: #DC942F;
-  --color-blue: #517BB3;
-  --color-teal: #71C7B7;
-  --color-red: #A24250;
-  --color-green: #455330;
-  --font-heading: 'PP Editorial New', sans-serif;
-  --font-body: 'PP Neue Montreal', sans-serif;
-  --font-size-base: 16px;
-  --font-size-lg: 20px;
-  --font-size-xl: 24px;
-  --font-size-xxl: 32px;
-  --font-size-xxxl: 40px;
-  --font-size-xxxxl: 48px;
-  --font-size-xxxxxl: 64px;
-  --font-size-xxxxxxl: 80px;
-  --font-size-xxxxxxxl: 96px;
-  --font-size-xxxxxxxl: 128px;
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: var(--font-size-base);
-  line-height: 1.5;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  margin: 0;
-  padding: 0;
-}
