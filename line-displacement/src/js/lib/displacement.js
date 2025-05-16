@@ -120,10 +120,10 @@ const lineMaterial = new THREE.ShaderMaterial({
   `,
   fragmentShader: `
     void main() {
-      gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); // White color
+      gl_FragColor = vec4(1.0, 0.9, 0.9, 0.6); // White color with 0.75 opacity
     }
   `,
-  transparent: false
+  transparent: true // Enable transparency for the material
 });
 
 // Store references to lines so you can remove them later
