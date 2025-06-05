@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/poc/dist/', // Comment this for local dev, uncomment for production
+  base: '/poc/clouds/dist/',
+  root: './clouds/src',
   build: {
-    outDir: 'dist',
+    outDir: './../dist',
     rollupOptions: {
-      input: 'main.js',
+      input: './clouds/main.js',
       output: {
         entryFileNames: 'assets/main.js',
         chunkFileNames: 'assets/[name].js',
@@ -17,5 +18,5 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
 });

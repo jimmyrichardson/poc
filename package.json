@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:clouds": "vite build --config ./clouds/vite.config.js",
     "build:image-depth-parallax": "vite build --config ./image-depth-parallax/vite.config.js",
     "build:line-displacement": "vite build --config ./line-displacement/vite.config.js",
     "preview": "vite preview"
