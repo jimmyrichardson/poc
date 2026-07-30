@@ -1,0 +1,14 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100dvh;
+}
+
+.draw {
+  display: block;
+  width: min(474px, 70vw);
+  height: auto;
+  overflow: visible;
+}

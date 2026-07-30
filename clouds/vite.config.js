@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
-  base: '/poc/clouds/dist/',
+// GitHub Pages: https://jimmyrichardson.github.io/poc/clouds/
+// Local dev:    use root `yarn dev` → http://localhost:5173/clouds/
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/poc/clouds/dist/',
   root: './clouds/src',
   build: {
     outDir: './../dist',
@@ -19,4 +21,4 @@ export default defineConfig({
       }
     }
   },
-});
+}));

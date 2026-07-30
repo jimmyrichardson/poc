@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite';
+import { githubPagesDevAssets } from './vite.plugins.js';
 
-export default defineConfig({
-  base: '/poc/dist/', // Comment this for local dev, uncomment for production
+// GitHub Pages: https://jimmyrichardson.github.io/poc/
+// Local dev:    http://localhost:5173/<subdir>/
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/poc/dist/',
+  appType: 'mpa',
+  plugins: [githubPagesDevAssets()],
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -18,4 +23,4 @@ export default defineConfig({
       }
     }
   }
-});
+}));

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breathe</title>
+  <link rel="stylesheet" href="../src/styles/styles.css">
+  <style>
+    .breathe-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100dvh;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .breathe-container {
+      width: 100%;
+      max-width: min(90vmin, 400px);
+      aspect-ratio: 1;
+    }
+
+    .breathe-container svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .breathe-outline {
+      fill: none;
+      stroke: var(--color-primary);
+      stroke-width: 1.5;
+    }
+
+    .breathe-inner {
+      fill: none;
+      stroke: var(--color-primary);
+      stroke-width: 1.5;
+    }
+
+    /* Centerline of channel: path runs between inner and outer. Stroke width = channel width. */
+    .breathe-line {
+      fill: none;
+      stroke: var(--color-primary);
+      stroke-width: 10;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      /* Perimeter = 4 × 80 = 320; dash = one side (80), gap = 240 */
+      stroke-dasharray: 80 240;
+      stroke-dashoffset: 320;
+      animation: breathe-line 16s linear infinite;
+    }
+
+    /* Animate offset 320 → 0 so the dash moves forward along the path = clockwise */
+    @keyframes breathe-line {
+      0% {
+        stroke-dashoffset: 320;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="breathe-section">
+    <div class="breathe-container">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Animating line first (behind outlines): centerline of channel, thick stroke fills between inner and outer -->
+        <path class="breathe-line" d="M 10 10 L 90 10 L 90 90 L 10 90 Z" />
+        <!-- Outer square outline -->
+        <path class="breathe-outline" d="M 5 5 L 95 5 L 95 95 L 5 95 Z" />
+        <!-- Inner square outline (channel is 10 units wide) -->
+        <path class="breathe-inner" d="M 15 15 L 85 15 L 85 85 L 15 85 Z" />
+      </svg>
+    </div>
+  </section>
+</body>
+
+</html>

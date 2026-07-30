@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
-  base: '/poc/line-displacement/dist/',
+// GitHub Pages: https://jimmyrichardson.github.io/poc/line-displacement/
+// Local dev:    use root `yarn dev` → http://localhost:5173/line-displacement/
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/poc/line-displacement/dist/',
   root: './line-displacement/src',
   build: {
     outDir: './../dist',
@@ -19,4 +21,4 @@ export default defineConfig({
       }
     }
   },
-});
+}));
