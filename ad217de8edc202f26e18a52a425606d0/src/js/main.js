@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import './lib/knockout.js';
 
 const BODY_WIDTH = 22;
 const HEAD_WIDTH = 58;
@@ -21,6 +22,38 @@ function tangentAngle(path, d, len, delta) {
   const p1 = path.getPointAtLength(Math.max(0, d - delta));
   const p2 = path.getPointAtLength(Math.min(len, d + delta));
   return Math.atan2(p2.y - p1.y, p2.x - p1.x);
+}
+
+/**
+ * Points along `path` from its end back to its start. Dense enough that the
+ * polyline is exact under the mask's 68px round-capped stroke.
+ */
+function reversedPoints(path, steps = 600) {
+  const len = path.getTotalLength();
+  const pts = [];
+  for (let i = steps; i >= 0; i--) pts.push(path.getPointAtLength((i / steps) * len));
+  return pts;
+}
+
+/** Polyline covering `progress` (0–1) of `pts`, interpolated at the leading end. */
+function partialPolyline(pts, progress) {
+  if (progress <= 0) return '';
+
+  const last = pts.length - 1;
+  const pos = progress * last;
+  const whole = Math.min(Math.floor(pos), last);
+
+  let d = `M${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i <= whole; i++) d += `L${pts[i].x} ${pts[i].y}`;
+
+  const frac = pos - whole;
+  if (frac > 0 && whole < last) {
+    const a = pts[whole];
+    const b = pts[whole + 1];
+    d += `L${a.x + (b.x - a.x) * frac} ${a.y + (b.y - a.y) * frac}`;
+  }
+
+  return d;
 }
 
 function buildRibbon(path) {
@@ -59,10 +92,10 @@ function buildRibbon(path) {
 }
 
 if (svg && defs && layer && centerline) {
-  const { d: ribbonD, len } = buildRibbon(centerline);
+  const { d: ribbonD } = buildRibbon(centerline);
   const ns = 'http://www.w3.org/2000/svg';
-  // Extra dash length so round mask caps fully clear both ribbon ends
-  const maskPad = HEAD_WIDTH;
+  // Sampled end → start, so the mask grows from the tail toward the arrowhead
+  const maskPoints = reversedPoints(centerline);
 
   // Static brushes are geometry references only — hide so the masked ribbon is what draws
   for (const el of layer.querySelectorAll('#trace, #trace-head, #cap-tip')) {
@@ -81,7 +114,7 @@ if (svg && defs && layer && centerline) {
   maskBg.setAttribute('fill', 'black');
 
   const maskStroke = document.createElementNS(ns, 'path');
-  maskStroke.setAttribute('d', centerline.getAttribute('d'));
+  maskStroke.setAttribute('d', '');
   maskStroke.setAttribute('fill', 'none');
   maskStroke.setAttribute('stroke', 'white');
   maskStroke.setAttribute('stroke-width', String(HEAD_WIDTH + 10));
@@ -98,17 +131,18 @@ if (svg && defs && layer && centerline) {
   ribbon.setAttribute('mask', 'url(#draw-mask)');
   layer.append(ribbon);
 
-  // Negative offset draws from path end (top) toward path start (arrowhead)
-  gsap.set(maskStroke, {
-    attr: {
-      'stroke-dasharray': len + maskPad,
-      'stroke-dashoffset': -(len + maskPad),
-    },
-  });
+  // The mask stroke is extended point by point rather than unwrapped with
+  // stroke-dasharray/-dashoffset: dash reveals render inconsistently across
+  // browsers (Safari tiles the pattern and ignores the offset's sign), while
+  // growing the geometry itself draws identically everywhere.
+  const draw = { progress: 0 };
 
-  gsap.to(maskStroke, {
-    attr: { 'stroke-dashoffset': 0 },
+  gsap.to(draw, {
+    progress: 1,
     duration: 2,
     ease: 'power2.inOut',
+    onUpdate: () => {
+      maskStroke.setAttribute('d', partialPolyline(maskPoints, draw.progress));
+    },
   });
 }

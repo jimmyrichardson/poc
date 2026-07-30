@@ -1,0 +1,5 @@
+#knockout {
+  display: block;
+  width: min(381px, 60vw);
+  height: auto;
+}

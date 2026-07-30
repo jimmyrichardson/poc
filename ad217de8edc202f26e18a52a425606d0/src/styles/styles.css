@@ -8,6 +8,8 @@
 
 /**/
 @import url('./components/section.css');
+@import url('./components/arrow.css');
+@import url('./components/knockout.css');
 
 :root {
   --color-primary: #1E1E1E;

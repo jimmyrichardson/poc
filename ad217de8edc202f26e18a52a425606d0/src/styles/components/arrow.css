@@ -1,0 +1,30 @@
+.arrow {
+  position: relative;
+  width: 1400px;
+  margin-inline: auto;
+
+  img,
+  svg {
+    position: absolute;
+  }
+
+  svg {
+    z-index: 1;
+  }
+
+  .arrow-1 {
+    left: 29.25%;
+    top: 46.25%;
+  }
+
+  /* Right half only — the copy that covers the path's second intersection */
+  .arrow-1--over {
+    z-index: 2;
+    clip-path: inset(0 0 0 50%);
+  }
+
+  .arrow-2 {
+    left: 52.25%;
+    top: 31%;
+  }
+}
