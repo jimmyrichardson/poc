@@ -3,3 +3,7 @@
   width: min(381px, 60vw);
   height: auto;
 }
+
+.knockout__section {
+  position: relative;
+}

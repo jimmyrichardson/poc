@@ -1,0 +1,87 @@
+.convo {
+  position: absolute;
+  right: 0;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  transform: translateX(30%);
+}
+
+.blurb {
+  position: relative;
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 999px;
+  width: fit-content;
+  font-weight: 500;
+  /* Sent bubbles pop from the bottom-right corner they're anchored to. */
+  transform-origin: 100% 100%;
+  /* Revealed by the timeline in js/lib/knockout.js. */
+  opacity: 0;
+}
+
+.blurb--received {
+  background-color: #FFD70F;
+  /* Incoming side: grows out of its left edge, the one the dots share. */
+  transform-origin: 0 100%;
+  color: #211F1B;
+}
+
+.blurb--sent {
+  background-color: #685BF4;
+  color: #FFFDF5;
+}
+
+/*
+  Tails. Sized to the source artwork and tucked into the corner the bubble is
+  anchored to, so the point lands on the bubble box's corner and the flat edge
+  hides under the pill. Same fill as the bubble, so the overlap is invisible.
+*/
+.blurb--received:not(.blurb--typing)::after,
+.blurb--sent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 13px;
+  background-repeat: no-repeat;
+}
+
+.blurb--received:not(.blurb--typing)::after {
+  left: 1rem;
+  bottom: -10px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='13' viewBox='0 0 16 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.61403 12.6224C0.930808 13.1537 -0.0590293 12.6251 0.0026334 11.7618L0.776346 0.928759C0.813723 0.405451 1.24916 3.3748e-07 1.77381 3.83345e-07L14.9282 1.53334e-06C15.8804 1.61658e-06 16.2938 1.20479 15.5422 1.78935L1.61403 12.6224Z' fill='%23FFD70F'/%3E%3C/svg%3E");
+}
+
+.blurb--sent::after {
+  right: 1rem;
+  bottom: -10px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='13' viewBox='0 0 16 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.3161 12.6224C14.9994 13.1537 15.9892 12.6251 15.9275 11.7618L15.1538 0.928759C15.1165 0.405451 14.681 3.3748e-07 14.1564 3.83345e-07L1.00194 1.53334e-06C0.0497817 1.61658e-06 -0.363589 1.20479 0.387997 1.78935L14.3161 12.6224Z' fill='%23685BF4'/%3E%3C/svg%3E");
+}
+
+/*
+  Out of flow so it doesn't reserve space: it sits exactly where the received
+  bubble starts, and swaps places with it once "typing" finishes. `left` is
+  measured against the received bubble in js/lib/knockout.js.
+*/
+.blurb--typing {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.blurb__dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #2A2462;
+  opacity: 0.35;
+}
