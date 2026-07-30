@@ -1,6 +1,6 @@
 /**/
 @import url('./util/normalize.css');
-@import url('./util/fonts.css');
+@import url('../../../shared/styles/fonts.css');
 @import url('./util/type.css');
 
 /**/

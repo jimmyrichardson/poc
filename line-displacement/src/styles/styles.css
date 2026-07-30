@@ -1,5 +1,6 @@
-/**/
-@import url('../../../dist/assets/main.css');
+/* Base styles + tokens from source (not the root's built dist/, which bakes in
+   a /poc/ base and breaks font URLs in local dev). */
+@import url('../../../src/styles/styles.css');
 
 /**/
 @import url('./components/button.css');

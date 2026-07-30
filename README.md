@@ -43,6 +43,16 @@ During `yarn dev`, a Vite plugin (`vite.plugins.js` → `githubPagesDevAssets`) 
 
 Prefer **relative** paths (`./dist/assets/...`, `../favicon.ico`) so local and GitHub Pages stay aligned.
 
+### Fonts
+
+All projects share one set of `@font-face` rules in [`shared/styles/fonts.css`](./shared/styles/fonts.css). Do not copy it into a project. Import it from that project's `styles.css`:
+
+```css
+@import url('../../../shared/styles/fonts.css');
+```
+
+Its `url()` paths are relative, so Vite resolves the `.otf` files at build time and emits them into that project's `dist/assets/` with the right `base` prefix. Never use root-absolute font URLs (`/public/fonts/...`) — they resolve in local dev but 404 on Pages, which serves under `/poc/`.
+
 ## Building
 
 Root assets:
@@ -57,6 +67,7 @@ Per-project bundles (writes into that project's `dist/`):
 yarn build:clouds
 yarn build:image-depth-parallax
 yarn build:line-displacement
+yarn build:ad217de8edc202f26e18a52a425606d0
 ```
 
 Vite `base` is environment-aware:
