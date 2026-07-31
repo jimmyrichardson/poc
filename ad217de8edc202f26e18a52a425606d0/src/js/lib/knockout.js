@@ -1,7 +1,5 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnScroll } from './reveal.js';
 
 /** Matches the x/y inset on #knockout-photo so the translate never exposes an edge. */
 const PHOTO_PAD = 60;
@@ -26,7 +24,7 @@ const dots = document.querySelectorAll('.blurb__dot');
 if (knockout && gradient && darkStop && photo) {
   const tl = gsap.timeline({ paused: true });
 
-  // Dark purple rises/fades over the solid #8B79FF base; photo follows slightly faster.
+  // Dark purple rises/fades over the solid var(--color-purple) base; photo follows slightly faster.
   tl.fromTo(
     gradient,
     { attr: { y1: GRADIENT_Y1 + PHOTO_PAD, y2: GRADIENT_Y2 + PHOTO_PAD } },
@@ -78,30 +76,6 @@ if (knockout && gradient && darkStop && photo) {
     });
   }
 
-  // Only start from the top once the reset trigger below has actually rewound us;
-  // otherwise resume, so re-crossing the 40% line mid-view doesn't replay.
-  const play = () => {
-    // invalidate() re-measures the function-based bubble offset before replaying.
-    if (tl.progress() === 0) tl.invalidate().restart();
-    else tl.play();
-  };
-
-  // Playhead: fires when the element's top passes 40% of the viewport.
-  ScrollTrigger.create({
-    trigger: knockout,
-    start: 'top 40%',
-    end: 'bottom top',
-    onEnter: play,
-    onEnterBack: play,
-  });
-
-  // Reset boundary: spans the full window where any part of the element is on
-  // screen, so leaving in either direction means it's completely out of view.
-  ScrollTrigger.create({
-    trigger: knockout,
-    start: 'top bottom',
-    end: 'bottom top',
-    onLeave: () => tl.pause(0),
-    onLeaveBack: () => tl.pause(0),
-  });
+  // invalidate() on replay re-measures the function-based bubble offset.
+  revealOnScroll(knockout, tl);
 }

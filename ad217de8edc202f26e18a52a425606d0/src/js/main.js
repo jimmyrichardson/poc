@@ -1,5 +1,7 @@
 import { gsap } from 'gsap';
+import { revealOnScroll } from './lib/reveal.js';
 import './lib/knockout.js';
+import './lib/scroll.js';
 
 const BODY_WIDTH = 22;
 const HEAD_WIDTH = 58;
@@ -136,13 +138,20 @@ if (svg && defs && layer && centerline) {
   // browsers (Safari tiles the pattern and ignores the offset's sign), while
   // growing the geometry itself draws identically everywhere.
   const draw = { progress: 0 };
+  const render = () => {
+    maskStroke.setAttribute('d', partialPolyline(maskPoints, draw.progress));
+  };
 
-  gsap.to(draw, {
+  // Starts empty: the section is below the fold, so nothing should be drawn
+  // until revealOnScroll plays it in.
+  render();
+
+  const tl = gsap.timeline({ paused: true }).to(draw, {
     progress: 1,
     duration: 2,
     ease: 'power2.inOut',
-    onUpdate: () => {
-      maskStroke.setAttribute('d', partialPolyline(maskPoints, draw.progress));
-    },
+    onUpdate: render,
   });
+
+  revealOnScroll(svg, tl);
 }

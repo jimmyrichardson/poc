@@ -1,0 +1,104 @@
+.hero {
+  /* Anchor for .scroll-cue */
+  position: relative;
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 5.125rem);
+    line-height: 1.2;
+    margin-inline: 4rem;
+    max-inline-size: 50%;
+
+    em {
+      /* Knockout fill: the text is real, plain markup — the sweep is a
+         background clipped to the glyphs. Tweak these three. */
+      --headline-fill: var(--color-text);
+      --headline-base: transparent;
+      --headline-fill-duration: 0.6s;
+      --headline-underline-duration: 0.8s;
+      /* Vertical radius of the leading edge's ellipse. Lower = rounder nib
+         (must stay above 100%); ~500% is nearly a straight vertical edge. */
+      --headline-fill-cap: 160%;
+      /* Sweep past the inline box so the last glyph's overhang still fills. */
+      --headline-fill-overshoot: 0.25em;
+
+      /* Underline is a pseudo-element, not text-decoration: the decoration
+         would inherit the transparent text fill and never paint. */
+      --headline-underline-thickness: 0.06em;
+      --headline-underline-offset: -0.02em;
+
+      position: relative;
+      font-family: 'georgia', serif;
+      font-style: italic;
+
+      /* Layer 1 = the sweep (starts at 0% width), layer 2 = the base at full
+         width behind it — transparent, so the words draw in from nothing.
+         The sweep is an ellipse anchored at left center, so its leading edge
+         bows outward like an ink nib instead of a hard vertical cut. */
+      background-image:
+        radial-gradient(100% var(--headline-fill-cap) at left center,
+          var(--headline-fill) 99.5%, transparent 100%),
+        linear-gradient(var(--headline-base), var(--headline-base));
+      background-repeat: no-repeat;
+      background-position: left center, left center;
+      background-size: 0% 100%, 100% 100%;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+
+      animation: hero-knockout-fill var(--headline-fill-duration) ease-in-out forwards;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 88%;
+        inset-inline: 0;
+        inset-block-end: var(--headline-underline-offset);
+        block-size: var(--headline-underline-thickness);
+        background-color: var(--color-purple);
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: left center;
+        animation: hero-knockout-underline var(--headline-underline-duration) cubic-bezier(0.95, 0.01, 0.7, 1) forwards;
+
+
+        animation-delay: var(--headline-fill-duration);
+        border-radius: 99px;
+      }
+    }
+  }
+}
+
+/* Only the fill layer grows; the base layer is pinned at 100% in both frames. */
+@keyframes hero-knockout-fill {
+  from {
+    background-size: 0% 100%, 100% 100%;
+  }
+
+  to {
+    background-size: calc(100% + var(--headline-fill-overshoot)) 100%, 100% 100%;
+  }
+}
+
+@keyframes hero-knockout-underline {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 em {
+    animation: none;
+    background-size: calc(100% + var(--headline-fill-overshoot)) 100%, 100% 100%;
+  }
+
+  .hero h1 em::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+}

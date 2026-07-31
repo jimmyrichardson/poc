@@ -1,20 +1,42 @@
-.arrow {
+/*
+  The three layers overlap by design, so they scale as one unit rather than
+  individually: .arrow__stage is a fixed-ratio box and every child is sized and
+  positioned in percentages of it. The reference frame is the 1400 x 881 layout
+  the composition was drawn at — the px values in the comments below are that
+  frame, and each percentage is that value over 1400 (widths, insets-inline) or
+  881 (insets-block).
+*/
+.arrow__stage {
+  --arrow-stage-max: 1400px;
+
   position: relative;
-  width: 1400px;
-  margin-inline: auto;
+  aspect-ratio: 1400 / 881;
+  /* Width-driven, capped at the design width. The dvh term keeps the box inside
+     a short viewport by shrinking it, so the proportions never break. */
+  inline-size: min(100vw, var(--arrow-stage-max), calc(100dvh * 1400 / 881));
 
   img,
   svg {
     position: absolute;
+    block-size: auto;
   }
 
   svg {
     z-index: 1;
   }
 
+  /* 474 x 567 at (463, 157) */
+  .draw {
+    inline-size: 33.857143%;
+    inset-inline-start: 33.071429%;
+    inset-block-start: 17.820658%;
+  }
+
+  /* 321 wide at (409.5, 407.5) */
   .arrow-1 {
-    left: 29.25%;
-    top: 46.25%;
+    inline-size: 22.928571%;
+    inset-inline-start: 29.25%;
+    inset-block-start: 46.25%;
   }
 
   /* Right half only — the copy that covers the path's second intersection */
@@ -23,8 +45,10 @@
     clip-path: inset(0 0 0 50%);
   }
 
+  /* 331 wide at (731.5, 273.1) */
   .arrow-2 {
-    left: 52.25%;
-    top: 31%;
+    inline-size: 23.642857%;
+    inset-inline-start: 52.25%;
+    inset-block-start: 31%;
   }
 }

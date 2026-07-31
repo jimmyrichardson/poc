@@ -6,9 +6,8 @@ section {
   height: 100dvh;
 }
 
+/* Sizing lives with the composition in components/arrow.css. */
 .draw {
   display: block;
-  width: min(474px, 70vw);
-  height: auto;
   overflow: visible;
 }

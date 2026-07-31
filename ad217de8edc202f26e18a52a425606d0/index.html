@@ -11,12 +11,38 @@
 </head>
 
 <body>
-  <section class="arrow">
+  <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0"
+    aria-valuemax="100" aria-valuenow="0">
+    <div class="scroll-progress__bar"></div>
+  </div>
+
+  <section class="hero">
+    <h1 class="hero__left">
+      <em>Expert-backed</em>
+      supply chain planning
+    </h1>
+
+    <a class="scroll-cue" href="#arrow">
+      <span class="scroll-cue__label">Scroll</span>
+      <svg class="scroll-cue__chevron" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true">
+        <path d="M2 2L12 12L22 2" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </a>
+  </section>
+
+  <section class="arrow" id="arrow">
     <!--
+      Fixed-ratio stage: every layer is positioned in percentages of this box, so
+      the overlaps hold at any viewport. See components/arrow.css.
+    -->
+    <div class="arrow__stage">
+      <!--
       #fill = clip silhouette. Brushes are stroked along #trace and clipped to #fill,
       so tips always match the silhouette (no end slivers).
     -->
-    <img class="arrow-1" src="./public/arrow-1.png" />
+      <img class="arrow-1" src="./public/arrow-1.png" />
     <svg class="draw" width="474" height="567" viewBox="0 -55 474 562" fill="none" xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true">
       <defs>
@@ -41,8 +67,9 @@
       path crosses arrow-1 twice: first on the left (passes under the copy below),
       then on the right (passes under this copy — i.e. the image sits on top).
     -->
-    <img class="arrow-1 arrow-1--over" src="./public/arrow-1.png" />
-    <img class="arrow-2" src="./public/arrow-2.png" />
+      <img class="arrow-1 arrow-1--over" src="./public/arrow-1.png" />
+      <img class="arrow-2" src="./public/arrow-2.png" />
+    </div>
   </section>
   <section>
     <!--
@@ -53,12 +80,12 @@
     <div class="knockout__section"> <svg id="knockout" width="381" height="512" viewBox="0 0 381 512" fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <!--
-        Solid #8B79FF base; #knockout-shade paints #2A2462 over it via the gradient.
+        Solid var(--color-purple) base; #knockout-shade paints #2A2462 over it via the gradient.
         Photo is clipped to the same silhouette and stacked on top.
       -->
         <path id="knockout-shape"
           d="M358.399 258.003C370.694 258.003 380.66 267.969 380.66 280.264V489.516C380.66 501.81 370.694 511.776 358.399 511.776H22.2607C9.96646 511.776 5.17796e-05 501.81 0 489.516V280.264C6.72516e-05 267.969 9.96648 258.003 22.2607 258.003H21.1475V253.773H22.2607C9.96646 253.773 5.17796e-05 243.807 0 231.513V22.2607C6.72516e-05 9.96648 9.96648 3.70077e-05 22.2607 0H358.399C370.694 6.26551e-05 380.66 9.9665 380.66 22.2607V231.513C380.66 243.807 370.694 253.773 358.399 253.773H359.512V258.003H358.399Z"
-          fill="#8B79FF" />
+          fill="var(--color-purple)" />
         <path id="knockout-shade"
           d="M358.399 258.003C370.694 258.003 380.66 267.969 380.66 280.264V489.516C380.66 501.81 370.694 511.776 358.399 511.776H22.2607C9.96646 511.776 5.17796e-05 501.81 0 489.516V280.264C6.72516e-05 267.969 9.96648 258.003 22.2607 258.003H21.1475V253.773H22.2607C9.96646 253.773 5.17796e-05 243.807 0 231.513V22.2607C6.72516e-05 9.96648 9.96648 3.70077e-05 22.2607 0H358.399C370.694 6.26551e-05 380.66 9.9665 380.66 22.2607V231.513C380.66 243.807 370.694 253.773 358.399 253.773H359.512V258.003H358.399Z"
           fill="url(#paint0_linear_603_30)" />

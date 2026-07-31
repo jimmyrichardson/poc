@@ -1,0 +1,22 @@
+/* Fixed reading-progress bar. The track is always present so the bar reads as a
+   proportion of the page, not a stray line. */
+.scroll-progress {
+  --scroll-progress-thickness: 4px;
+
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 100;
+  block-size: var(--scroll-progress-thickness);
+  background-color: #eee;
+  pointer-events: none;
+}
+
+.scroll-progress__bar {
+  block-size: 100%;
+  inline-size: 100%;
+  background-color: var(--color-purple);
+  /* scaleX rather than width: the scrub runs on the compositor. */
+  transform: scaleX(0);
+  transform-origin: left center;
+}
