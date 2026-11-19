@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Play button">
+<g id="Circle">
+<circle cx="44" cy="44" r="44" fill="#3F181C" fill-opacity="0.45"/>
+<circle cx="44" cy="44" r="43" stroke-width="2" stroke="white" stroke-opacity="0.6"/>
+</g>
+<g id="Triangle (centroid on circle center)" clip-path="url(#clip0_0_271)">
+<path id="Vector" d="M34.7624 28L62.4752 44L34.7624 60V28Z" fill="white"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_271">
+<rect width="27.7128" height="32" fill="white" transform="translate(34.7624 28)"/>
+</clipPath>
+</defs>
+</svg>

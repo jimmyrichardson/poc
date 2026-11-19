@@ -1,0 +1,328 @@
+/*
+ * Tokens come straight from the Figma wireframe (1440 frame). Sizes are fluid:
+ * each clamp() hits the Figma value at 1440px and scales with the viewport below it.
+ */
+:root {
+  --nav-h: 64px;
+  --gutter: clamp(20px, 8.3333vw, 120px);
+  --pad-y: clamp(72px, 8.3333vw, 120px);
+  /* Sticky stages sit under the nav on desktop (the wireframe slides are 900 tall with the nav overlaid). */
+  --stage-top: 0px;
+  --stage-h: 100svh;
+
+  --brick: #3f181c;
+  --brick-deep: #2b1013;
+  --brick-track: #5e2a30;
+  --sky: #5cb6dd;
+  --gold: #f6b02c;
+  --amber: #f4a012;
+  --blue: #14b0f0;
+  --coral: #fc7062;
+  --green: #0a6e34;
+  --ink: #212121;
+  --cream: #faf8ef;
+  --paper: #f7f7f5;
+  --placeholder: #dbdbd9;
+
+  --fs-display: clamp(2.5rem, 5vw, 4.5rem);      /* 72 */
+  --fs-h1: clamp(2.125rem, 4.1667vw, 3.75rem);   /* 60 */
+  --fs-h2: clamp(1.875rem, 3.3333vw, 3rem);      /* 48 */
+  --fs-h3: clamp(1.625rem, 2.7778vw, 2.5rem);    /* 40 */
+  --fs-h4: clamp(1.375rem, 2.2222vw, 2rem);      /* 32 */
+  --fs-h5: clamp(1.125rem, 1.6667vw, 1.5rem);    /* 24 */
+  --fs-body: clamp(1.0625rem, 1.3889vw, 1.25rem);/* 20 */
+
+  --serif: 'Literata', Georgia, serif;
+  --sans: 'Figtree', system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+
+  --shadow-card: 0 2px 6px rgba(63, 24, 28, .12), 0 16px 40px rgba(63, 24, 28, .28);
+}
+
+@media (max-width: 899px) {
+  :root {
+    --nav-h: 56px;
+    --stage-top: var(--nav-h);
+    --stage-h: calc(100svh - var(--nav-h));
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Expanding "See more" panels compensate scroll themselves; native anchoring would double it. */
+  overflow-anchor: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  /* Literata is loaded as a variable font; the design pins the optical-size axis at 12. */
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 12;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* clip (not hidden) so off-canvas reveal states can't widen the page without breaking position: sticky */
+main {
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ---------- type ---------- */
+
+.t-display {
+  font-weight: 300;
+  font-size: var(--fs-display);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.t-h1 {
+  font-weight: 300;
+  font-size: var(--fs-h1);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.t-h2 {
+  font-weight: 300;
+  font-size: var(--fs-h2);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.t-h3 {
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.t-h4 {
+  font-weight: 400;
+  font-size: var(--fs-h4);
+  line-height: 1.3;
+}
+
+.t-h5 {
+  font-weight: 400;
+  font-size: var(--fs-h5);
+  line-height: 1.35;
+}
+
+.t-body {
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.4;
+}
+
+.t-sans-body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.4;
+}
+
+.t-eyebrow {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--fs-h5);
+  line-height: 1.4;
+}
+
+.hl {
+  font-weight: 600;
+}
+
+.hl--medium {
+  font-weight: 500;
+}
+
+.hl--amber { color: var(--amber); }
+.hl--blue { color: var(--blue); }
+.hl--coral { color: var(--coral); }
+.hl--green { color: var(--green); }
+.hl--gold { color: var(--gold); text-decoration: none; }
+
+.center {
+  text-align: center;
+  margin-inline: auto;
+}
+
+/* Figma widths, scaled with the viewport below 1440 and released on small screens. */
+.w {
+  max-width: min(calc(var(--w) * 1px), calc(var(--w) / 1440 * 100vw));
+}
+
+@media (max-width: 899px) {
+  .w {
+    max-width: none;
+  }
+}
+
+/* Text link · underline 25% offset, 10% thickness */
+.link {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 10%;
+  text-underline-offset: 25%;
+  transition: text-underline-offset .3s var(--ease), opacity .3s;
+}
+
+.link:hover {
+  text-underline-offset: 35%;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.copy--16 {
+  gap: 16px;
+}
+
+/* ---------- "See more" panel ---------- */
+/* Closed: zero height and pulled into the parent gap, so closed spacing matches the wireframe exactly. */
+.expand {
+  overflow: hidden;
+  height: 0;
+  margin-top: -24px;
+}
+
+.copy--16>.expand {
+  margin-top: -16px;
+}
+
+.expand__inner {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4em;
+}
+
+.copy--16 .expand__inner {
+  padding-top: 16px;
+}
+
+html:not(.js) .expand {
+  height: auto;
+}
+
+/* ---------- shared slide pieces ---------- */
+
+.slide {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  background: #141414;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.bg[data-parallax] {
+  top: -7%;
+  height: 114%;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--brick);
+  pointer-events: none;
+}
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--placeholder);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--fs-h5);
+  line-height: 1.4;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* JS hides intro elements until the cover timeline runs, so nothing flashes in its final state first. */
+html.js [data-intro] {
+  visibility: hidden;
+  /* Safety net: if the script never runs, show everything after a beat. */
+  animation: intro-fallback 0s 2.5s forwards;
+}
+
+@keyframes intro-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-intro] {
+    visibility: visible;
+  }
+}
+
+/* SplitText line masks: give descenders and accents room so the mask doesn't clip them. */
+[data-split]>*,
+[data-intro-split]>*,
+[data-close-text]>* {
+  padding-block: .08em .16em;
+  margin-block: -.08em -.16em;
+}

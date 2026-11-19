@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Belonging by Design (prototype)</title>
+  <meta name="description" content="Proof of concept: scroll-driven build of the Belonging by Design wireframe.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Literata as a variable font with the optical-size axis; pinned to opsz 12 in CSS -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..700&family=Literata:opsz,wght@7..72,300..700&display=swap">
+  <link rel="stylesheet" href="./dist/assets/main.css">
+</head>
+
+<body>
+  <header class="nav">
+    <a class="nav__title" href="#top">Belonging by Design</a>
+    <nav class="nav__chapters" aria-label="Chapters">
+      <a href="#connection" data-chapter-link="connection">Connection</a>
+      <a href="#neighborhoods" data-chapter-link="neighborhoods">Neighborhoods</a>
+      <a href="#science" data-chapter-link="science">The Science</a>
+      <a href="#benefits" data-chapter-link="benefits">Benefits</a>
+      <a href="#designing" data-chapter-link="designing">Designing for Belonging</a>
+    </nav>
+    <p class="nav__current" aria-hidden="true"></p>
+    <div class="nav__track" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"
+      aria-valuenow="0">
+      <div class="nav__progress"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01 · Cover -->
+    <section class="cover" id="top">
+      <div class="cover__title">
+        <p class="t-eyebrow" data-intro>Belonging by Design</p>
+        <h1 class="t-display w" style="--w:1098" data-intro data-intro-split>How the neurobiology of social connection
+          can help shape thriving neighborhoods</h1>
+      </div>
+      <div class="cover__scene">
+        <div class="scene-canvas" data-cover-scene>
+          <img src="./images/matteo-0-base.webp" width="2048" height="1152" alt="Illustrated neighborhood street scene"
+            data-intro>
+          <img src="./images/matteo-1.webp" width="2048" height="1152" alt="" data-layer data-focus="78.5 53.7"
+            data-intro>
+          <img src="./images/matteo-2.webp" width="2048" height="1152" alt="" data-layer data-focus="39.2 34.3"
+            data-intro>
+          <img src="./images/matteo-3.webp" width="2048" height="1152" alt="" data-layer data-focus="62.8 54.4"
+            data-intro>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Begins from birth · see more -->
+    <section class="slide birth" id="connection" data-chapter="connection" data-expand-scope>
+      <img class="bg" src="./images/birth-poster.webp" width="1280" height="720" alt="" data-parallax>
+      <div class="scrim" data-scrim data-closed="0.4" data-open="0.75" style="opacity:.4"></div>
+      <div class="birth__copy copy">
+        <h2 class="t-h1 w" style="--w:835" data-split>The need for social connection begins <span
+            class="hl hl--medium hl--amber">from birth</span>.</h2>
+        <div class="expand" id="birth-more">
+          <div class="expand__inner t-sans-body w" style="--w:690">
+            <p>Infants are strongly drawn to faces because they provide key social information like identity,
+              attention, and intention. Babies don't just passively see faces. They actively prefer looking at them,
+              even within hours of birth, because faces support social interaction.</p>
+            <p>When infants view faces, even at just a few months old, brain regions involved in face processing
+              respond more strongly than when they view other visual scenes. Even later developing brain areas, like
+              parts of the prefrontal cortex, appear to be active in infancy during meaningful social interactions.</p>
+          </div>
+        </div>
+        <button class="link" type="button" aria-expanded="false" aria-controls="birth-more" data-expand-toggle
+          data-label-more="See more" data-label-less="See less">See more</button>
+      </div>
+    </section>
+
+    <!-- 03 · Connection is a need · image stays, text changes -->
+    <section class="story need" data-story data-chapter="connection">
+      <div class="story__media need__media">
+        <img class="need__art" src="./images/connection-illustration.webp" width="1516" height="1038"
+          alt="Silhouette of a person filled with scenes of friendship, home, family, food, water and sleep">
+      </div>
+      <div class="story__steps">
+        <div class="story__step" data-step>
+          <p class="story__content t-h3 w" style="--w:486"><span class="hl hl--blue">Social connection</span>, like
+            food, water, or sleep, is <span class="hl hl--coral">crucial</span> to our physical and emotional health,
+            safety, and <span class="hl hl--green">survival</span>.</p>
+        </div>
+        <div class="story__step" data-step>
+          <p class="story__content t-h3 w" style="--w:486">A sense of being connected via frequent, positive
+            interactions with other people over time leads to a feeling of <span class="hl hl--blue">belonging.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Foundation · illustration fixed while 05a–c scroll -->
+    <section class="story foundation" data-story data-chapter="connection">
+      <div class="story__media foundation__media">
+        <div class="placeholder foundation__placeholder"><span>Illustration TBD</span></div>
+      </div>
+      <div class="story__steps">
+        <div class="story__step" data-step>
+          <div class="story__content copy w" style="--w:690" data-expand-scope>
+            <p class="t-h3">For adults, a sense of belonging makes being a good caregiver of very young children
+              possible.</p>
+            <div class="expand" id="foundation-more">
+              <div class="expand__inner t-body">
+                <p>The ability of parents and other caregivers to provide a secure environment with predictable
+                  routines for children, starting at birth, is heavily influenced by how well their own basic needs
+                  are met, including their need for belonging and mutual support. For adults who have experienced a
+                  pile-up of adversity since childhood, the additional weight of current adversity may overload their
+                  ability to provide the stable, responsive relationships their children need. Supportive
+                  relationships help adults and children deal with stress, regulate emotions and behaviors, and build
+                  hope for the future. Public policies and human service programs that are specifically designed to
+                  support the skills and environments that foster responsive relationships between adult caregivers
+                  also support the healthy development of children.</p>
+              </div>
+            </div>
+            <button class="link" type="button" aria-expanded="false" aria-controls="foundation-more"
+              data-expand-toggle data-label-more="See more" data-label-less="See less">See more</button>
+          </div>
+        </div>
+        <div class="story__step" data-step>
+          <p class="story__content t-h3 w" style="--w:690">When babies receive good care, the foundation for a
+            successful life can be built.</p>
+        </div>
+        <div class="story__step" data-step>
+          <p class="story__content t-h3 w" style="--w:690">In the earliest stages of development, our <span
+              class="hl hl--blue">neurobiological</span> systems are being built through interactions with the people
+            and places that surround us.</p>
+        </div>
+        <div class="story__step" data-step>
+          <p class="story__content t-h3 w" style="--w:690">Each stage of development builds on what came before.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Neighborhood · cards scroll over the scene while its layers build up -->
+    <section class="scene" id="neighborhoods" data-scene data-chapter="neighborhoods">
+      <div class="scene__stage">
+        <div class="scene-canvas" data-pan>
+          <img src="./images/matteo-0-base.webp" width="2048" height="1152" alt="Illustrated neighborhood street scene"
+            loading="lazy">
+          <div class="scene__scrim"></div>
+          <img src="./images/matteo-1.webp" width="2048" height="1152" alt="" data-layer data-focus="78.5 53.7"
+            loading="lazy">
+          <img src="./images/matteo-2.webp" width="2048" height="1152" alt="" data-layer data-focus="39.2 34.3"
+            loading="lazy">
+          <img src="./images/matteo-3.webp" width="2048" height="1152" alt="" data-layer data-focus="62.8 54.4"
+            loading="lazy">
+          <img src="./images/matteo-4.webp" width="2048" height="1152" alt="" data-layer data-focus="77.2 30.8"
+            loading="lazy">
+          <img src="./images/matteo-5.webp" width="2048" height="1152" alt="" data-layer data-focus="57.2 22"
+            loading="lazy">
+          <img src="./images/matteo-6.webp" width="2048" height="1152" alt="" data-layer data-focus="20 38"
+            loading="lazy">
+          <img src="./images/matteo-7.webp" width="2048" height="1152" alt="" data-layer data-focus="9.7 16.5"
+            loading="lazy">
+        </div>
+      </div>
+      <div class="scene__cards">
+        <div class="scene__step scene__step--statement" data-step>
+          <div class="statement-card">
+            <p class="t-h4 w" style="--w:696">The neighborhood where families live creates the conditions for social
+              connection, making healthy development possible.</p>
+          </div>
+        </div>
+        <div class="scene__step" data-step data-side="start">
+          <div class="callout"><p class="callout__label">Play</p><p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+        </div>
+        <div class="scene__step" data-step data-side="end">
+          <div class="callout"><p class="callout__label">Transportation</p><p class="t-h5">Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+        <div class="scene__step" data-step data-side="start">
+          <div class="callout"><p class="callout__label">Safety</p><p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+        </div>
+        <div class="scene__step" data-step data-side="start">
+          <div class="callout"><p class="callout__label">Food</p><p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+        </div>
+        <div class="scene__step" data-step data-side="start">
+          <div class="callout"><p class="callout__label">Housing</p><p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+        </div>
+        <div class="scene__step" data-step data-side="end">
+          <div class="callout"><p class="callout__label">Opportunities</p><p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+        </div>
+        <div class="scene__step" data-step data-side="end">
+          <div class="callout"><p class="callout__label">Health</p><p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · What belonging feels like (voices grid) -->
+    <section class="voices" data-chapter="neighborhoods">
+      <h2 class="t-h2 w center" style="--w:996" data-split>So, what does belonging <span
+          class="hl hl--medium hl--blue">feel</span> like?</h2>
+      <div class="voices__grid" data-voices>
+        <img class="voices__collage" src="./images/voices-collage.webp" width="1130" height="868" loading="lazy"
+          alt="Collage of neighbors, a doctor and a family talking about belonging">
+        <button class="play" type="button" style="--x:70.9%;--y:26.8%" data-clip="Woman, top right"
+          aria-label="Play clip: woman, top right"><img src="./images/play-button.svg" width="88" height="88"
+            alt=""></button>
+        <button class="play" type="button" style="--x:47.1%;--y:50.8%" data-clip="Doctor"
+          aria-label="Play clip: doctor"><img src="./images/play-button.svg" width="88" height="88" alt=""></button>
+        <button class="play" type="button" style="--x:20.7%;--y:68.1%" data-clip="Woman, left"
+          aria-label="Play clip: woman, left"><img src="./images/play-button.svg" width="88" height="88"
+            alt=""></button>
+        <button class="play" type="button" style="--x:72%;--y:71.7%" data-clip="Family"
+          aria-label="Play clip: family"><img src="./images/play-button.svg" width="88" height="88" alt=""></button>
+      </div>
+      <p class="t-h2 w center" style="--w:996" data-split>As it turns out, belonging isn't just a feeling.</p>
+    </section>
+
+    <!-- 08 · Science of Belonging · see more -->
+    <section class="slide science" id="science" data-chapter="science" data-expand-scope>
+      <img class="bg" src="./images/science-bg.webp" width="1201" height="801" alt="" loading="lazy" data-parallax>
+      <div class="scrim" data-scrim data-closed="0.55" data-open="0.8" style="opacity:.55"></div>
+      <div class="science__top copy" data-hide-on-open>
+        <h2 class="t-h2 w" style="--w:792" data-split>The Science of Belonging</h2>
+        <p class="t-h4 w" style="--w:792" data-reveal>Scientists are beginning to understand social connection as
+          something much more essential.</p>
+      </div>
+      <div class="science__bottom copy">
+        <p class="t-h2 w" style="--w:792" data-split>Belonging is a biological <span
+            class="hl hl--medium hl--amber">need</span>.</p>
+        <div class="expand" id="science-more">
+          <div class="expand__inner t-body w" style="--w:690">
+            <p>People have evolved to rely on cooperation with others to survive, learn, and thrive. In infancy, we
+              require support from caregivers to meet all of our basic needs. From childhood, we learn the knowledge,
+              skills, and behaviors needed for <span class="hl hl--green">survival</span> by interacting with parents,
+              peers, and other members of our community. This lifelong dependence on others has shaped our brains,
+              giving us sophisticated abilities to understand other people's thoughts, cooperate toward shared goals,
+              and learn through observation.</p>
+          </div>
+        </div>
+        <button class="link" type="button" aria-expanded="false" aria-controls="science-more" data-expand-toggle
+          data-label-more="See more" data-label-less="See less">See more</button>
+      </div>
+    </section>
+
+    <!-- 09 · Brain · brain stays, cards change; hotspots jump to their region -->
+    <section class="story brain" data-story data-brain data-chapter="science">
+      <div class="story__media brain__media">
+        <div class="brain__figure">
+          <img src="./images/brain.webp" width="1536" height="1024" loading="lazy"
+            alt="Illustrated brain with highlighted regions">
+          <button class="hotspot" type="button" style="--x:35%;--y:29%" data-hotspot="1"
+            aria-label="Anterior cingulate cortex">
+            <img class="hotspot__idle" src="./images/hotspot-1-acc.svg" width="26" height="26" alt="">
+            <img class="hotspot__active" src="./images/hotspot-1-acc-active.svg" width="44" height="44" alt="">
+          </button>
+          <button class="hotspot" type="button" style="--x:66%;--y:30%" data-hotspot="2"
+            aria-label="Default mode network">
+            <img class="hotspot__idle" src="./images/hotspot-2-dmn.svg" width="26" height="26" alt="">
+            <img class="hotspot__active" src="./images/hotspot-2-dmn-active.svg" width="44" height="44" alt="">
+          </button>
+          <button class="hotspot" type="button" style="--x:50%;--y:46%" data-hotspot="3" aria-label="Limbic system">
+            <img class="hotspot__idle" src="./images/hotspot-3-limbic.svg" width="26" height="26" alt="">
+            <img class="hotspot__active" src="./images/hotspot-3-limbic-active.svg" width="44" height="44" alt="">
+          </button>
+          <button class="hotspot" type="button" style="--x:57%;--y:76%" data-hotspot="4"
+            aria-label="Neurochemical systems">
+            <img class="hotspot__idle" src="./images/hotspot-4-neurochem.svg" width="26" height="26" alt="">
+            <img class="hotspot__active" src="./images/hotspot-4-neurochem-active.svg" width="44" height="44" alt="">
+          </button>
+          <button class="hotspot" type="button" style="--x:46.5%;--y:56%" data-hotspot="5" aria-label="Hypothalamus">
+            <img class="hotspot__idle" src="./images/hotspot-5-hypothalamus.svg" width="26" height="26" alt="">
+            <img class="hotspot__active" src="./images/hotspot-5-hypothalamus-active.svg" width="44" height="44"
+              alt="">
+          </button>
+        </div>
+        <!-- Small screens: the dots sit too close for fingers, so the regions are also offered as chips -->
+        <div class="brain__legend" role="group" aria-label="Brain regions">
+          <button type="button" style="--c:#f29e21" data-hotspot="1">ACC</button>
+          <button type="button" style="--c:#9e80e5" data-hotspot="2">DMN</button>
+          <button type="button" style="--c:#73b873" data-hotspot="3">Limbic</button>
+          <button type="button" style="--c:#ed7380" data-hotspot="4">Neurochemical</button>
+          <button type="button" style="--c:#5999f2" data-hotspot="5">Hypothalamus</button>
+        </div>
+      </div>
+      <div class="story__steps">
+        <div class="story__step" data-step>
+          <div class="story__content brain__intro w" style="--w:486">
+            <p class="t-h2">Brain circuits for social needs overlap with those for physical needs.</p>
+            <p class="t-h5">The brain signals us to eat, drink, rest, and <span class="hl hl--blue">connect with
+                others</span> when we need it.</p>
+            <p class="t-h5">When we lack social connection, it activates the same brain regions as physical pain.</p>
+          </div>
+        </div>
+        <div class="story__step" data-step>
+          <div class="story__content region" style="--c:#f29e21">
+            <p class="region__title t-h4">Anterior cingulate cortex</p>
+            <p class="t-h5">The anterior cingulate cortex (ACC) acts like an alarm system for both physical and social
+              pain: It detects threats and creates feelings of distress that motivate us to repair the damage and avoid
+              similar threats in the future.</p>
+            <button class="link" type="button" data-tbd>See more</button>
+          </div>
+        </div>
+        <div class="story__step" data-step>
+          <div class="story__content region" style="--c:#9e80e5">
+            <p class="region__title t-h4">Default mode network</p>
+            <p class="t-h5">The default mode network (DMN) is most active during inward-focused thinking, such as
+              reflecting on the past, daydreaming, or considering another person's thoughts and feelings.</p>
+            <button class="link" type="button" data-tbd>See more</button>
+          </div>
+        </div>
+        <div class="story__step" data-step>
+          <div class="story__content region" style="--c:#73b873">
+            <p class="region__title t-h4">Limbic system</p>
+            <p class="t-h5">The limbic system regulates emotions, behavior, motivation and memory, as well as basic
+              survival instincts such as eating, drinking, caring for children, and responding to danger.</p>
+            <button class="link" type="button" data-tbd>See more</button>
+          </div>
+        </div>
+        <div class="story__step" data-step>
+          <div class="story__content region" style="--c:#ed7380">
+            <p class="region__title t-h4">Neurochemical systems</p>
+            <p class="t-h5">Social interaction causes the brain to release chemicals linked to pleasure and reward, such
+              as dopamine, serotonin, and natural opioids, making positive social relationships intensely rewarding.
+            </p>
+            <button class="link" type="button" data-tbd>See more</button>
+          </div>
+        </div>
+        <div class="story__step" data-step>
+          <div class="story__content region" style="--c:#5999f2">
+            <p class="region__title t-h4">Hypothalamus</p>
+            <p class="t-h5">The hypothalamus regulates social behaviors and bonding by releasing hormones like oxytocin
+              and vasopressin, which influence trust, attachment, and emotional responses.</p>
+            <button class="link" type="button" data-tbd>See more</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Prenatal to three · labels -->
+    <section class="figures" data-chapter="science" data-expand-scope>
+      <div class="figures__heading copy">
+        <h2 class="t-h2 w" style="--w:996" data-split>Developing biological systems are supported in essential ways
+          by caregivers and the communities that surround them.</h2>
+        <p class="t-h4 w" style="--w:996" data-reveal>This is especially true during the prenatal to three period.</p>
+      </div>
+      <div class="figures__row" data-reveal-group>
+        <div class="figure">
+          <img class="figure__art" src="./images/fig-brain-architecture.webp" width="487" height="711" loading="lazy"
+            alt="Child figure highlighting brain architecture">
+          <button class="pill" type="button" style="--c:#e4502c" aria-expanded="false"
+            aria-controls="brain-architecture-more" data-expand-toggle>
+            Brain architecture
+            <img src="./images/chevron-closed.svg" width="20" height="20" alt="" data-chevron
+              data-closed-src="./images/chevron-closed.svg" data-open-src="./images/chevron-open.svg">
+          </button>
+        </div>
+        <div class="figure">
+          <img class="figure__art" src="./images/fig-immune-system.webp" width="505" height="721" loading="lazy"
+            alt="Child figure highlighting the immune system">
+          <span class="pill" style="--c:#603874">Immune system <img src="./images/chevron-closed.svg" width="20"
+              height="20" alt=""></span>
+        </div>
+        <div class="figure">
+          <img class="figure__art" src="./images/fig-organ-systems.webp" width="443" height="741" loading="lazy"
+            alt="Child figure highlighting organ systems">
+          <span class="pill" style="--c:#546034">Organ systems <img src="./images/chevron-closed.svg" width="20"
+              height="20" alt=""></span>
+        </div>
+      </div>
+      <div class="expand figures__more" id="brain-architecture-more">
+        <div class="expand__inner copy">
+          <p class="t-body w" style="--w:690">Young children experience their world as an environment of
+            relationships, and these relationships affect virtually all aspects of their development, including the
+            architecture of their developing brains. The quality and stability of a child's human relationships in the
+            early years lay the foundation for a wide range of later developmental outcomes that really matter:
+            self-confidence and sound mental health, motivation to learn, achievement in school and later in life, the
+            ability to control aggressive impulses and resolve conflicts in non-violent ways, and ultimately to be a
+            successful parent oneself. Stated simply, relationships are the "active ingredients" of the environment's
+            influence on healthy human development.</p>
+          <button class="link" type="button" aria-controls="brain-architecture-more" data-expand-toggle>Close</button>
+        </div>
+      </div>
+      <div class="takeaway" data-reveal>
+        <img class="takeaway__cover" src="./images/guide-cover.webp" width="1200" height="800" loading="lazy" alt="">
+        <div class="takeaway__copy">
+          <p class="t-h4">Want a takeaway guide to the science? Grab it here.</p>
+          <a class="link" href="#" data-tbd>Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · Benefits of belonging -->
+    <section class="benefits" id="benefits" data-chapter="benefits">
+      <h2 class="t-h2 w center" style="--w:1098" data-split>The benefits of belonging span our entire lives.</h2>
+      <div class="benefits__grid" data-benefits>
+        <article class="benefit" style="--c:#e8502f">
+          <div class="benefit__copy"><h3 class="benefit__title">Better physical health</h3>
+          <p class="t-h5 benefit__text">Lower inflammation, improved blood pressure, healthier body weight</p></div>
+          <div class="benefit__art benefit__art--physical"><img src="./images/benefit-physical.webp" width="511"
+              height="517" loading="lazy" alt="Illustration of a healthy body"></div>
+        </article>
+        <article class="benefit" style="--c:#7a6493">
+          <div class="benefit__copy"><h3 class="benefit__title">Better cognitive health</h3>
+          <p class="t-h5 benefit__text">Helps cope with stress, greater sense of meaning and purpose, strengthens
+            resilience</p></div>
+          <div class="benefit__art benefit__art--cognitive"><img src="./images/benefit-cognitive.webp" width="415"
+              height="508" loading="lazy" alt="Illustration of a calm, focused mind"></div>
+        </article>
+        <article class="benefit" style="--c:#5b6e3c">
+          <div class="benefit__copy"><h3 class="benefit__title">Social capital</h3>
+          <p class="t-h5 benefit__text">Connections we use to get information, guidance, and opportunities to help us
+            reach our goals</p></div>
+          <div class="benefit__art benefit__art--social"><img src="./images/benefit-social.webp" width="495"
+              height="497" loading="lazy" alt="Illustration of a connected community"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 12 · Bridge cycle · tiles light up in turn as you scroll -->
+    <section class="story cycle" data-story data-cycle data-chapter="benefits">
+      <div class="story__media cycle__stage">
+        <h2 class="t-h2 w center" style="--w:996">Neighborhoods support belonging. And belonging supports
+          neighborhoods.</h2>
+        <div class="cycle__diagram">
+          <img class="cycle__ring" src="./images/ring.webp" width="840" height="840" loading="lazy" alt="">
+          <p class="tile tile--1 is-on" style="--c:#e4502c">Community conditions promote belonging</p>
+          <p class="tile tile--2" style="--c:#603874">Belonging supports caregivers of very young children</p>
+          <p class="tile tile--3" style="--c:#546034">Caregivers support healthy early childhood development</p>
+          <p class="tile tile--4" style="--c:#f6b02c;--on-ink:#3f181c">And healthy kids mean healthy neighborhoods,
+            for everyone.</p>
+        </div>
+      </div>
+      <div class="story__steps" aria-hidden="true">
+        <div class="story__step" data-step></div>
+        <div class="story__step" data-step></div>
+        <div class="story__step" data-step></div>
+        <div class="story__step" data-step></div>
+      </div>
+    </section>
+
+    <!-- 13 · Day in the life (video) -->
+    <section class="slide video" data-chapter="benefits">
+      <img class="bg" src="./images/day-in-life-poster.webp" width="1280" height="720" loading="lazy" alt=""
+        data-parallax>
+      <div class="scrim" style="opacity:.35"></div>
+      <p class="t-h2 w" style="--w:792" data-split>[Short line introducing the video, TBD]</p>
+    </section>
+
+    <!-- 14 · Designing for Belonging · intro -->
+    <section class="slide designing" id="designing" data-chapter="designing">
+      <img class="bg" src="./images/designing-bg.webp" width="1200" height="633" loading="lazy" alt="" data-parallax>
+      <div class="scrim" style="opacity:.55"></div>
+      <div class="designing__copy">
+        <h2 class="t-display w" style="--w:894" data-split>Designing for Belonging</h2>
+        <p class="t-h4 w" style="--w:690" data-reveal>We've learned about what belonging does inside of us.</p>
+        <p class="t-h4 w" style="--w:690" data-reveal>But the science doesn't give us a blueprint. It gives us a
+          better set of questions.</p>
+      </div>
+    </section>
+
+    <!-- 15–17 · How might we -->
+    <section class="hmw" data-chapter="designing" data-expand-scope>
+      <div class="hmw__copy">
+        <div class="hmw__header">
+          <p class="hmw__num" data-reveal>01</p>
+          <h2 class="t-h2 w" style="--w:588" data-split>How might we <span class="hl hl--medium hl--amber">design
+              spaces</span> that foster belonging?</h2>
+        </div>
+        <div class="hmw__body copy copy--16" data-reveal>
+          <p class="t-h4 w" style="--w:588">Gathering places can shape daily experiences in deeply meaningful ways.
+          </p>
+          <div class="expand" id="hmw-1-more">
+            <div class="expand__inner t-body w" style="--w:588">
+              <p>The design of public spaces, streets, and neighborhood settings shapes how people move around and
+                interact in their daily lives. Belonging depends on having regular access to spaces that enable social
+                interaction to occur.</p>
+              <p>Healthy development is built not just through parenting but through everyday relationships with
+                caring adults, and design choices that increase informal interaction across neighbors and generations
+                strengthen those relationships, supporting better outcomes for young children while building more
+                connected, resilient communities for everyone.</p>
+            </div>
+          </div>
+          <button class="link" type="button" aria-expanded="false" aria-controls="hmw-1-more" data-expand-toggle
+            data-label-more="See more" data-label-less="See less">See more</button>
+        </div>
+      </div>
+      <div class="placeholder hmw__placeholder" data-reveal-art><span>Illustration TBD</span></div>
+    </section>
+
+    <section class="hmw" data-chapter="designing">
+      <div class="hmw__copy">
+        <div class="hmw__header">
+          <p class="hmw__num" data-reveal>02</p>
+          <h2 class="t-h2 w" style="--w:588" data-split>How might we <span class="hl hl--medium hl--amber">create
+              opportunities to gather</span>?</h2>
+        </div>
+        <div class="hmw__body copy copy--16" data-reveal>
+          <p class="t-h4 w" style="--w:588">Meaningful participation in activities and events strengthens social
+            connections.</p>
+          <button class="link" type="button" data-tbd>See more</button>
+        </div>
+      </div>
+      <div class="placeholder hmw__placeholder" data-reveal-art><span>Illustration TBD</span></div>
+    </section>
+
+    <section class="hmw" data-chapter="designing">
+      <div class="hmw__copy">
+        <div class="hmw__header">
+          <p class="hmw__num" data-reveal>03</p>
+          <h2 class="t-h2 w" style="--w:588" data-split>How might we <span class="hl hl--medium hl--amber">reduce
+              burdens</span> for families?</h2>
+        </div>
+        <div class="hmw__body copy copy--16" data-reveal>
+          <p class="t-h4 w" style="--w:588">Communities can help reduce sources of stress and create more bandwidth for
+            social interaction.</p>
+          <button class="link" type="button" data-tbd>See more</button>
+        </div>
+      </div>
+      <div class="placeholder hmw__placeholder" data-reveal-art><span>Illustration TBD</span></div>
+    </section>
+
+    <!-- 18 · Close + where to go next -->
+    <section class="close" data-chapter="designing">
+      <div class="close__hero" data-close-hero>
+        <div class="scene-canvas">
+          <img src="./images/matteo-0-base.webp" width="2048" height="1152" alt="Illustrated neighborhood street scene"
+            loading="lazy">
+          <img src="./images/matteo-1.webp" width="2048" height="1152" alt="" loading="lazy">
+          <img src="./images/matteo-2.webp" width="2048" height="1152" alt="" loading="lazy">
+          <img src="./images/matteo-3.webp" width="2048" height="1152" alt="" loading="lazy">
+          <img src="./images/matteo-4.webp" width="2048" height="1152" alt="" data-layer data-focus="77.2 30.8"
+            loading="lazy">
+          <img src="./images/matteo-5.webp" width="2048" height="1152" alt="" data-layer data-focus="57.2 22"
+            loading="lazy">
+          <img src="./images/matteo-6.webp" width="2048" height="1152" alt="" data-layer data-focus="20 38"
+            loading="lazy">
+          <img src="./images/matteo-7.webp" width="2048" height="1152" alt="" data-layer data-focus="9.7 16.5"
+            loading="lazy">
+        </div>
+        <div class="scrim close__scrim" style="opacity:.72"></div>
+        <p class="close__statement t-h1 w" style="--w:996" data-close-text>Belonging is one example of how the science
+          of early childhood development (ECD 2.0) changes the way we understand the relationship between people and
+          place.</p>
+      </div>
+      <div class="next">
+        <p class="t-h4 w" style="--w:792" data-reveal>For more information about how FirstPlace applies ECD 2.0 to
+          community revitalization, see our <a class="hl hl--gold" href="#" data-tbd>mission statement</a>.</p>
+        <div class="next__cards" data-reveal-group>
+          <a class="resource" href="#" data-tbd>
+            <img class="resource__cover" src="./images/cover-science.webp" width="1103" height="1426" loading="lazy"
+              alt="">
+            <span class="resource__title">The Science of ECD 2.0</span>
+            <span class="resource__text">Learn more about the science.</span>
+          </a>
+          <a class="resource" href="#" data-tbd>
+            <img class="resource__cover" src="./images/cover-neighborhood.webp" width="1200" height="798" loading="lazy"
+              alt="">
+            <span class="resource__title">Seeing Your Neighborhood Through an ECD Lens</span>
+            <span class="resource__text">Check out our visual field guide.</span>
+          </a>
+          <a class="resource" href="#" data-tbd>
+            <img class="resource__cover" src="./images/guide-cover.webp" width="1200" height="800" loading="lazy"
+              alt="">
+            <span class="resource__title">Community Action Guide</span>
+            <span class="resource__text">Apply the science of ECD 2.0.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img class="footer__logo" src="./images/firstplace-logo.svg" width="196.663" height="44" alt="FirstPlace">
+    <p class="footer__links">[footer links TBD]</p>
+  </footer>
+
+  <dialog class="clip-dialog" aria-labelledby="clip-dialog-title">
+    <div class="clip-dialog__frame">
+      <p class="clip-dialog__eyebrow">Voices of belonging</p>
+      <p class="clip-dialog__title" id="clip-dialog-title"></p>
+      <p class="clip-dialog__note">Clip TBD. This tile will play its short video here.</p>
+    </div>
+    <form method="dialog"><button class="link clip-dialog__close" type="submit">Close</button></form>
+  </dialog>
+
+  <p class="toast" role="status" aria-live="polite"></p>
+
+  <script type="module" src="./dist/assets/main.js"></script>
+</body>
+
+</html>
