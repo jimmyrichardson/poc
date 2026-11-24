@@ -98,14 +98,23 @@
       </div>
     </section>
 
-    <!-- 05 · Foundation · illustration fixed while 05a–c scroll -->
+    <!-- 05 · Foundation · one illustration per step; they crossfade inside the circle as the steps scroll -->
     <section class="story foundation" data-story data-chapter="connection">
       <div class="story__media foundation__media">
-        <div class="placeholder foundation__placeholder"><span>Illustration TBD</span></div>
+        <div class="foundation__art">
+          <img class="is-active" src="./images/foundation-1.webp" width="1280" height="1280" loading="lazy"
+            alt="A father and his young son walk hand in hand" data-frame>
+          <img src="./images/foundation-2.webp" width="1280" height="1280" loading="lazy"
+            alt="A baby in a high chair is fed at a family table" data-frame>
+          <img src="./images/foundation-3.webp" width="1280" height="1280" loading="lazy"
+            alt="Caregivers sit on a play mat with a baby, in front of a large brain" data-frame>
+          <img src="./images/foundation-4.webp" width="1280" height="1280" loading="lazy"
+            alt="A parent helps a toddler climb a flight of stairs" data-frame>
+        </div>
       </div>
       <div class="story__steps">
         <div class="story__step" data-step>
-          <div class="story__content copy w" style="--w:690" data-expand-scope>
+          <div class="story__content copy w" style="--w:588" data-expand-scope>
             <p class="t-h3">For adults, a sense of belonging makes being a good caregiver of very young children
               possible.</p>
             <div class="expand" id="foundation-more">
@@ -121,21 +130,21 @@
                   also support the healthy development of children.</p>
               </div>
             </div>
-            <button class="link" type="button" aria-expanded="false" aria-controls="foundation-more"
-              data-expand-toggle data-label-more="See more" data-label-less="See less">See more</button>
+            <button class="link" type="button" aria-expanded="false" aria-controls="foundation-more" data-expand-toggle
+              data-label-more="See more" data-label-less="See less">See more</button>
           </div>
         </div>
         <div class="story__step" data-step>
-          <p class="story__content t-h3 w" style="--w:690">When babies receive good care, the foundation for a
+          <p class="story__content t-h3 w" style="--w:588">When babies receive good care, the foundation for a
             successful life can be built.</p>
         </div>
         <div class="story__step" data-step>
-          <p class="story__content t-h3 w" style="--w:690">In the earliest stages of development, our <span
+          <p class="story__content t-h3 w" style="--w:588">In the earliest stages of development, our <span
               class="hl hl--blue">neurobiological</span> systems are being built through interactions with the people
             and places that surround us.</p>
         </div>
         <div class="story__step" data-step>
-          <p class="story__content t-h3 w" style="--w:690">Each stage of development builds on what came before.</p>
+          <p class="story__content t-h3 w" style="--w:588">Each stage of development builds on what came before.</p>
         </div>
       </div>
     </section>
@@ -171,33 +180,53 @@
           </div>
         </div>
         <div class="scene__step" data-step data-side="start">
-          <div class="callout"><p class="callout__label">Play</p><p class="t-h5">Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div class="callout">
+            <p class="callout__label">Play</p>
+            <p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
         </div>
         <div class="scene__step" data-step data-side="end">
-          <div class="callout"><p class="callout__label">Transportation</p><p class="t-h5">Lorem ipsum dolor sit
+          <div class="callout">
+            <p class="callout__label">Transportation</p>
+            <p class="t-h5">Lorem ipsum dolor sit
               amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           </div>
         </div>
         <div class="scene__step" data-step data-side="start">
-          <div class="callout"><p class="callout__label">Safety</p><p class="t-h5">Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div class="callout">
+            <p class="callout__label">Safety</p>
+            <p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
         </div>
         <div class="scene__step" data-step data-side="start">
-          <div class="callout"><p class="callout__label">Food</p><p class="t-h5">Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div class="callout">
+            <p class="callout__label">Food</p>
+            <p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
         </div>
         <div class="scene__step" data-step data-side="start">
-          <div class="callout"><p class="callout__label">Housing</p><p class="t-h5">Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div class="callout">
+            <p class="callout__label">Housing</p>
+            <p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
         </div>
         <div class="scene__step" data-step data-side="end">
-          <div class="callout"><p class="callout__label">Opportunities</p><p class="t-h5">Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div class="callout">
+            <p class="callout__label">Opportunities</p>
+            <p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
         </div>
         <div class="scene__step" data-step data-side="end">
-          <div class="callout"><p class="callout__label">Health</p><p class="t-h5">Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div class="callout">
+            <p class="callout__label">Health</p>
+            <p class="t-h5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -250,95 +279,100 @@
       </div>
     </section>
 
-    <!-- 09 · Brain · brain stays, cards change; hotspots jump to their region -->
-    <section class="story brain" data-story data-brain data-chapter="science">
-      <div class="story__media brain__media">
+    <!-- 09 · Brain · one screen. Regions are optional: a hotspot expands its card in place (over the intro
+         copy on desktop, under the chips on small screens), so readers can explore or simply scroll on. -->
+    <section class="brain" data-brain data-chapter="science">
+      <p class="brain__title t-h2 w" style="--w:486">Brain circuits for social needs overlap with those for
+        physical needs.</p>
+      <div class="brain__lede w" style="--w:486">
+        <p class="t-h5">The brain signals us to eat, drink, rest, and <span class="hl hl--blue">connect with
+            others</span> when we need it.</p>
+        <p class="t-h5">When we lack social connection, it activates the same brain regions as physical pain.</p>
+        <p class="brain__hint">Select a region to explore it.</p>
+      </div>
+      <div class="brain__media">
         <div class="brain__figure">
           <img src="./images/brain.webp" width="1536" height="1024" loading="lazy"
             alt="Illustrated brain with highlighted regions">
-          <button class="hotspot" type="button" style="--x:35%;--y:29%" data-hotspot="1"
-            aria-label="Anterior cingulate cortex">
+          <button class="hotspot" type="button" style="--x:35%;--y:29%" aria-controls="brain-region"
+            aria-expanded="false" data-hotspot="1" aria-label="Anterior cingulate cortex">
             <img class="hotspot__idle" src="./images/hotspot-1-acc.svg" width="26" height="26" alt="">
             <img class="hotspot__active" src="./images/hotspot-1-acc-active.svg" width="44" height="44" alt="">
           </button>
-          <button class="hotspot" type="button" style="--x:66%;--y:30%" data-hotspot="2"
-            aria-label="Default mode network">
+          <button class="hotspot" type="button" style="--x:66%;--y:30%" aria-controls="brain-region"
+            aria-expanded="false" data-hotspot="2" aria-label="Default mode network">
             <img class="hotspot__idle" src="./images/hotspot-2-dmn.svg" width="26" height="26" alt="">
             <img class="hotspot__active" src="./images/hotspot-2-dmn-active.svg" width="44" height="44" alt="">
           </button>
-          <button class="hotspot" type="button" style="--x:50%;--y:46%" data-hotspot="3" aria-label="Limbic system">
+          <button class="hotspot" type="button" style="--x:50%;--y:46%" aria-controls="brain-region"
+            aria-expanded="false" data-hotspot="3" aria-label="Limbic system">
             <img class="hotspot__idle" src="./images/hotspot-3-limbic.svg" width="26" height="26" alt="">
             <img class="hotspot__active" src="./images/hotspot-3-limbic-active.svg" width="44" height="44" alt="">
           </button>
-          <button class="hotspot" type="button" style="--x:57%;--y:76%" data-hotspot="4"
-            aria-label="Neurochemical systems">
+          <button class="hotspot" type="button" style="--x:57%;--y:76%" aria-controls="brain-region"
+            aria-expanded="false" data-hotspot="4" aria-label="Neurochemical systems">
             <img class="hotspot__idle" src="./images/hotspot-4-neurochem.svg" width="26" height="26" alt="">
             <img class="hotspot__active" src="./images/hotspot-4-neurochem-active.svg" width="44" height="44" alt="">
           </button>
-          <button class="hotspot" type="button" style="--x:46.5%;--y:56%" data-hotspot="5" aria-label="Hypothalamus">
+          <button class="hotspot" type="button" style="--x:46.5%;--y:56%" aria-controls="brain-region"
+            aria-expanded="false" data-hotspot="5" aria-label="Hypothalamus">
             <img class="hotspot__idle" src="./images/hotspot-5-hypothalamus.svg" width="26" height="26" alt="">
-            <img class="hotspot__active" src="./images/hotspot-5-hypothalamus-active.svg" width="44" height="44"
-              alt="">
+            <img class="hotspot__active" src="./images/hotspot-5-hypothalamus-active.svg" width="44" height="44" alt="">
           </button>
         </div>
         <!-- Small screens: the dots sit too close for fingers, so the regions are also offered as chips -->
         <div class="brain__legend" role="group" aria-label="Brain regions">
-          <button type="button" style="--c:#f29e21" data-hotspot="1">ACC</button>
-          <button type="button" style="--c:#9e80e5" data-hotspot="2">DMN</button>
-          <button type="button" style="--c:#73b873" data-hotspot="3">Limbic</button>
-          <button type="button" style="--c:#ed7380" data-hotspot="4">Neurochemical</button>
-          <button type="button" style="--c:#5999f2" data-hotspot="5">Hypothalamus</button>
+          <button type="button" style="--c:#f29e21" aria-controls="brain-region" aria-expanded="false"
+            data-hotspot="1">ACC</button>
+          <button type="button" style="--c:#9e80e5" aria-controls="brain-region" aria-expanded="false"
+            data-hotspot="2">DMN</button>
+          <button type="button" style="--c:#73b873" aria-controls="brain-region" aria-expanded="false"
+            data-hotspot="3">Limbic</button>
+          <button type="button" style="--c:#ed7380" aria-controls="brain-region" aria-expanded="false"
+            data-hotspot="4">Neurochemical</button>
+          <button type="button" style="--c:#5999f2" aria-controls="brain-region" aria-expanded="false"
+            data-hotspot="5">Hypothalamus</button>
         </div>
       </div>
-      <div class="story__steps">
-        <div class="story__step" data-step>
-          <div class="story__content brain__intro w" style="--w:486">
-            <p class="t-h2">Brain circuits for social needs overlap with those for physical needs.</p>
-            <p class="t-h5">The brain signals us to eat, drink, rest, and <span class="hl hl--blue">connect with
-                others</span> when we need it.</p>
-            <p class="t-h5">When we lack social connection, it activates the same brain regions as physical pain.</p>
-          </div>
-        </div>
-        <div class="story__step" data-step>
-          <div class="story__content region" style="--c:#f29e21">
-            <p class="region__title t-h4">Anterior cingulate cortex</p>
-            <p class="t-h5">The anterior cingulate cortex (ACC) acts like an alarm system for both physical and social
-              pain: It detects threats and creates feelings of distress that motivate us to repair the damage and avoid
-              similar threats in the future.</p>
-            <button class="link" type="button" data-tbd>See more</button>
-          </div>
-        </div>
-        <div class="story__step" data-step>
-          <div class="story__content region" style="--c:#9e80e5">
-            <p class="region__title t-h4">Default mode network</p>
-            <p class="t-h5">The default mode network (DMN) is most active during inward-focused thinking, such as
-              reflecting on the past, daydreaming, or considering another person's thoughts and feelings.</p>
-            <button class="link" type="button" data-tbd>See more</button>
-          </div>
-        </div>
-        <div class="story__step" data-step>
-          <div class="story__content region" style="--c:#73b873">
-            <p class="region__title t-h4">Limbic system</p>
-            <p class="t-h5">The limbic system regulates emotions, behavior, motivation and memory, as well as basic
-              survival instincts such as eating, drinking, caring for children, and responding to danger.</p>
-            <button class="link" type="button" data-tbd>See more</button>
-          </div>
-        </div>
-        <div class="story__step" data-step>
-          <div class="story__content region" style="--c:#ed7380">
-            <p class="region__title t-h4">Neurochemical systems</p>
-            <p class="t-h5">Social interaction causes the brain to release chemicals linked to pleasure and reward, such
-              as dopamine, serotonin, and natural opioids, making positive social relationships intensely rewarding.
-            </p>
-            <button class="link" type="button" data-tbd>See more</button>
-          </div>
-        </div>
-        <div class="story__step" data-step>
-          <div class="story__content region" style="--c:#5999f2">
-            <p class="region__title t-h4">Hypothalamus</p>
-            <p class="t-h5">The hypothalamus regulates social behaviors and bonding by releasing hormones like oxytocin
-              and vasopressin, which influence trust, attachment, and emotional responses.</p>
-            <button class="link" type="button" data-tbd>See more</button>
+      <div class="brain__panel" id="brain-region" aria-live="polite">
+        <div class="brain__clip">
+          <div class="brain__card">
+            <div class="region" style="--c:#f29e21" data-region="1">
+              <p class="region__title t-h4">Anterior cingulate cortex</p>
+              <p class="t-h5">The anterior cingulate cortex (ACC) acts like an alarm system for both physical and social
+                pain: It detects threats and creates feelings of distress that motivate us to repair the damage and
+                avoid
+                similar threats in the future.</p>
+              <button class="link" type="button" data-tbd>See more</button>
+            </div>
+            <div class="region" style="--c:#9e80e5" data-region="2">
+              <p class="region__title t-h4">Default mode network</p>
+              <p class="t-h5">The default mode network (DMN) is most active during inward-focused thinking, such as
+                reflecting on the past, daydreaming, or considering another person's thoughts and feelings.</p>
+              <button class="link" type="button" data-tbd>See more</button>
+            </div>
+            <div class="region" style="--c:#73b873" data-region="3">
+              <p class="region__title t-h4">Limbic system</p>
+              <p class="t-h5">The limbic system regulates emotions, behavior, motivation and memory, as well as basic
+                survival instincts such as eating, drinking, caring for children, and responding to danger.</p>
+              <button class="link" type="button" data-tbd>See more</button>
+            </div>
+            <div class="region" style="--c:#ed7380" data-region="4">
+              <p class="region__title t-h4">Neurochemical systems</p>
+              <p class="t-h5">Social interaction causes the brain to release chemicals linked to pleasure and reward,
+                such
+                as dopamine, serotonin, and natural opioids, making positive social relationships intensely rewarding.
+              </p>
+              <button class="link" type="button" data-tbd>See more</button>
+            </div>
+            <div class="region" style="--c:#5999f2" data-region="5">
+              <p class="region__title t-h4">Hypothalamus</p>
+              <p class="t-h5">The hypothalamus regulates social behaviors and bonding by releasing hormones like
+                oxytocin
+                and vasopressin, which influence trust, attachment, and emotional responses.</p>
+              <button class="link" type="button" data-tbd>See more</button>
+            </div>
+            <button class="brain__close" type="button" aria-label="Close region details"></button>
           </div>
         </div>
       </div>
@@ -402,22 +436,28 @@
       <h2 class="t-h2 w center" style="--w:1098" data-split>The benefits of belonging span our entire lives.</h2>
       <div class="benefits__grid" data-benefits>
         <article class="benefit" style="--c:#e8502f">
-          <div class="benefit__copy"><h3 class="benefit__title">Better physical health</h3>
-          <p class="t-h5 benefit__text">Lower inflammation, improved blood pressure, healthier body weight</p></div>
+          <div class="benefit__copy">
+            <h3 class="benefit__title">Better physical health</h3>
+            <p class="t-h5 benefit__text">Lower inflammation, improved blood pressure, healthier body weight</p>
+          </div>
           <div class="benefit__art benefit__art--physical"><img src="./images/benefit-physical.webp" width="511"
               height="517" loading="lazy" alt="Illustration of a healthy body"></div>
         </article>
         <article class="benefit" style="--c:#7a6493">
-          <div class="benefit__copy"><h3 class="benefit__title">Better cognitive health</h3>
-          <p class="t-h5 benefit__text">Helps cope with stress, greater sense of meaning and purpose, strengthens
-            resilience</p></div>
+          <div class="benefit__copy">
+            <h3 class="benefit__title">Better cognitive health</h3>
+            <p class="t-h5 benefit__text">Helps cope with stress, greater sense of meaning and purpose, strengthens
+              resilience</p>
+          </div>
           <div class="benefit__art benefit__art--cognitive"><img src="./images/benefit-cognitive.webp" width="415"
               height="508" loading="lazy" alt="Illustration of a calm, focused mind"></div>
         </article>
         <article class="benefit" style="--c:#5b6e3c">
-          <div class="benefit__copy"><h3 class="benefit__title">Social capital</h3>
-          <p class="t-h5 benefit__text">Connections we use to get information, guidance, and opportunities to help us
-            reach our goals</p></div>
+          <div class="benefit__copy">
+            <h3 class="benefit__title">Social capital</h3>
+            <p class="t-h5 benefit__text">Connections we use to get information, guidance, and opportunities to help us
+              reach our goals</p>
+          </div>
           <div class="benefit__art benefit__art--social"><img src="./images/benefit-social.webp" width="495"
               height="497" loading="lazy" alt="Illustration of a connected community"></div>
         </article>
@@ -555,14 +595,15 @@
           community revitalization, see our <a class="hl hl--gold" href="#" data-tbd>mission statement</a>.</p>
         <div class="next__cards" data-reveal-group>
           <a class="resource" href="#" data-tbd>
-            <img class="resource__cover" src="./images/cover-science.webp" width="1103" height="1426" loading="lazy"
+            <img class="resource__cover" src="./images/cover-science.webp" width="1200" height="798" loading="lazy"
               alt="">
             <span class="resource__title">The Science of ECD 2.0</span>
             <span class="resource__text">Learn more about the science.</span>
           </a>
           <a class="resource" href="#" data-tbd>
-            <img class="resource__cover" src="./images/cover-neighborhood.webp" width="1200" height="798" loading="lazy"
-              alt="">
+            <!-- portrait poster: anchor the square crop to the top so the guide's title stays in frame -->
+            <img class="resource__cover resource__cover--top" src="./images/cover-neighborhood.webp" width="1103"
+              height="1426" loading="lazy" alt="">
             <span class="resource__title">Seeing Your Neighborhood Through an ECD Lens</span>
             <span class="resource__text">Check out our visual field guide.</span>
           </a>

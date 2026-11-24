@@ -6,7 +6,27 @@ import { setLayerReveal } from './scene.js';
 
 const m = () => (reducedMotion() ? 0 : 1);
 
-/** 01 · Cover: headline lines rise out of a mask, then the street scene builds its first three layers. */
+/**
+ * Split text into lines that fade up in a stagger: opacity plus a short rise, no line masks,
+ * so nothing is clipped mid-animation. `autoSplit` re-splits on resize and font load and
+ * re-runs the tween, so it is returned from onSplit for SplitText to clean up.
+ */
+function fadeUpLines(el, vars = {}) {
+  SplitText.create(el, {
+    type: 'lines',
+    autoSplit: true,
+    onSplit: (self) => gsap.from(self.lines, {
+      autoAlpha: 0,
+      y: 24,
+      duration: 1.1,
+      stagger: 0.1,
+      ease: 'power3.out',
+      ...vars,
+    }),
+  });
+}
+
+/** 01 · Cover: headline lines fade up, then the street scene builds its first three layers. */
 export function initCover() {
   const cover = document.querySelector('.cover');
   if (!cover) return;
@@ -22,18 +42,7 @@ export function initCover() {
 
   gsap.from(eyebrow, { autoAlpha: 0, y: 16, duration: 0.9, ease: 'power3.out', delay: 0.1 });
 
-  SplitText.create(headline, {
-    type: 'lines',
-    mask: 'lines',
-    autoSplit: true,
-    onSplit: (self) => gsap.from(self.lines, {
-      yPercent: 105,
-      duration: 1.2,
-      stagger: 0.09,
-      ease: 'expo.out',
-      delay: 0.2,
-    }),
-  });
+  fadeUpLines(headline, { duration: 1.2, delay: 0.2 });
 
   const tl = gsap.timeline({ delay: 0.55 });
   tl.from(base, { autoAlpha: 0, scale: 1.05, duration: 1.4, ease: 'power2.out' });
@@ -57,22 +66,11 @@ export function initCover() {
   });
 }
 
-/** Headlines marked [data-split] rise line by line when they enter. */
+/** Headlines marked [data-split] fade up line by line when they enter. */
 export function initSplits() {
   if (!m()) return;
   document.querySelectorAll('[data-split]').forEach((el) => {
-    SplitText.create(el, {
-      type: 'lines',
-      mask: 'lines',
-      autoSplit: true,
-      onSplit: (self) => gsap.from(self.lines, {
-        yPercent: 105,
-        duration: 1.1,
-        stagger: 0.08,
-        ease: 'expo.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      }),
-    });
+    fadeUpLines(el, { scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
   });
 }
 
@@ -200,16 +198,5 @@ export function initClose() {
   });
   tl.to(scrim, { opacity: 0.72, duration: 1.2, ease: 'none' }, '>-0.2');
 
-  SplitText.create(text, {
-    type: 'lines',
-    mask: 'lines',
-    autoSplit: true,
-    onSplit: (self) => gsap.from(self.lines, {
-      yPercent: 105,
-      duration: 1.1,
-      stagger: 0.08,
-      ease: 'expo.out',
-      scrollTrigger: { trigger: hero, start: 'top 12%', once: true },
-    }),
-  });
+  fadeUpLines(text, { scrollTrigger: { trigger: hero, start: 'top 12%', once: true } });
 }

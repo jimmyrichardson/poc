@@ -10,10 +10,10 @@ Build of the FirstPlace wireframe (Figma `6:137`) with GSAP + ScrollTrigger, tes
 | Wireframe | Build |
 | --- | --- |
 | Click-to-advance slides (03, 05, 09, 12) | Advance as you scroll. Media is CSS-sticky; steps scroll past it (`src/js/lib/story.js`). Every state is a pure function of scroll position, so scrolling back rewinds. |
-| Image stays, text changes (03, 05, 09) | Text fades in as it rises into the reading area and out as it leaves. Stacked on small screens: media pinned on top, text scrolls under it. |
+| Image stays, text changes (03, 05) | Text fades in as it rises into the reading area and out as it leaves. Stacked on small screens: media pinned on top, text scrolls under it. |
 | Community scene (06) | Scene sticks; callout cards scroll over it; each card grows its layer in from the layer's focal point. Below 16:9 the canvas pans to the newest layer. |
 | See more (02, 05, 08, 10, 15) | Expands in place (`src/js/lib/expand.js`). Opening never moves the scroll position; closing holds the pressed link still. Native scroll anchoring is off so it can't double-correct. |
-| Clickable brain (09) | Hotspots jump to their card. Under 900px the dots are too close for fingers (limbic/hypothalamus ~25px apart), so a row of region chips does the same job. |
+| Clickable brain (09) | One screen, not a scroll sequence, so the regions are optional. A hotspot expands its region card in place (over the intro copy on desktop, under the chips on small screens); the same dot, × or Esc closes it. Under 900px the dots are too close for fingers (limbic/hypothalamus ~25px apart), so a row of region chips does the same job. |
 | Video grid (07) | Stand-in collage; play buttons are placed by % on the faces and scale with it (48px minimum). Clicking opens a placeholder dialog. |
 | Bridge cycle (12) | Tiles light in turn as you scroll; ring rotates with progress. Under 700px it becomes a vertical list. |
 | Literata | Google Fonts variable build with the `opsz` axis, pinned with `font-variation-settings: "opsz" 12`. |

@@ -292,13 +292,32 @@
   background: #fbf3e7;
 }
 
-.foundation__placeholder {
+/* Figma: 640px square at x 740 of 1440, inset 60px from the right; capped by the stage height.
+   The frames are transparent around the art. One 0.6s crossfade, no delays: the incoming frame
+   eases out on top while the outgoing one eases in underneath (mirrored curves), so both finish
+   together and the shared circle stays solid mid-change. */
+.foundation__art {
   position: absolute;
-  right: var(--gutter);
+  right: 4.1667vw;
   top: 50%;
-  width: clamp(200px, 26.6667vw, 384px);
+  width: min(44.4444vw, calc(var(--stage-h) * .76));
   aspect-ratio: 1;
   transform: translateY(-50%);
+}
+
+.foundation__art>img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .6s ease-in;
+}
+
+.foundation__art>img.is-active {
+  z-index: 1;
+  opacity: 1;
+  transition: opacity .6s ease-out;
 }
 
 @media (min-width: 900px) {
@@ -309,7 +328,7 @@
 
 @media (max-width: 899px) {
   .foundation {
-    --media-h: 260px;
+    --media-h: min(300px, 40svh);
   }
 
   .foundation__media {
@@ -317,10 +336,11 @@
     background: #fbf3e7;
   }
 
-  .foundation__placeholder {
+  /* the art has generous margin around the circle, so it can fill the band edge to edge */
+  .foundation__art {
     right: auto;
     left: 50%;
-    width: 200px;
+    width: var(--media-h);
     transform: translate(-50%, -50%);
   }
 }
@@ -493,21 +513,73 @@
    09 · Brain
    ========================================================================== */
 
+/* One screen, not a scroll sequence: copy on the left, brain on the right, 1fr rows above and below
+   keep the copy centred. The region card opens in the same cell as the intro copy ("body"), and both
+   stay in layout while hidden, so the cell is always as tall as the taller of the two: nothing moves. */
 .brain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(54.1667vw, calc((var(--stage-h) - 80px) * 1.5));
+  grid-template-rows: 1fr auto auto 1fr;
+  grid-template-areas:
+    ". media"
+    "title media"
+    "body media"
+    ". media";
+  column-gap: 2.0833vw;
+  min-height: var(--stage-h);
+  padding: 40px 2.0833vw 40px var(--gutter);
   background: #1c1f23;
   color: #fff;
 }
 
+.brain__media {
+  grid-area: media;
+  align-self: center;
+}
+
+.brain__title {
+  grid-area: title;
+}
+
+.brain__lede,
+.brain__panel {
+  grid-area: body;
+  align-self: start;
+  margin-top: 32px;
+}
+
+.brain__lede {
+  transition: opacity .35s .1s, visibility 0s;
+}
+
+.brain.is-open .brain__lede {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s, visibility 0s .25s;
+}
+
+/* closed: folded up from the bottom edge; open: unfolds downward from the top */
+.brain__panel {
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0 round 6px);
+  transition: clip-path .45s var(--ease), visibility 0s .45s;
+}
+
+.brain.is-open .brain__panel {
+  visibility: visible;
+  clip-path: inset(0 0 0 0 round 6px);
+  transition: clip-path .6s .1s var(--ease), visibility 0s;
+}
+
 .brain__figure {
-  position: absolute;
-  right: 2.0833vw;
-  top: 50%;
-  width: min(54.1667vw, calc((var(--stage-h) - 40px) * 1.5));
+  position: relative;
+  width: 100%;
   aspect-ratio: 3 / 2;
-  transform: translateY(-50%);
 }
 
 .brain__figure>img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -591,46 +663,159 @@
   position: relative;
 }
 
-@media (min-width: 900px) {
-  .brain .story__steps {
-    padding: 0 var(--gutter);
-  }
-}
-
-.brain__intro {
+.brain__lede {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
+.brain__hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: -8px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .02em;
+  color: rgba(255, 255, 255, .65);
+}
+
+/* a small pulsing dot echoes the hotspots */
+.brain__hint::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, .6);
+  animation: hint-ping 2.4s var(--ease) infinite;
+}
+
+@keyframes hint-ping {
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+}
+
+/* the regions share one cell: the hidden ones hold its height at the longest region's, so switching
+   never moves anything, while the visible one's background hugs its own content */
+.brain__card {
+  position: relative;
+  display: grid;
+  width: min(486px, 100%);
+}
+
 .region {
+  grid-area: 1 / 1;
+  align-self: start;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
-  width: min(486px, 100%);
   padding: 32px 36px;
   border-radius: 6px;
   background: #2a2e34;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility 0s .3s;
+}
+
+.region.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .45s .12s, visibility 0s;
 }
 
 .region__title {
+  padding-right: 40px;
   color: var(--c);
 }
 
+.brain__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color .25s;
+}
+
+.brain__close::before,
+.brain__close::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, .8);
+  translate: -50% -50%;
+  rotate: 45deg;
+}
+
+.brain__close::after {
+  rotate: -45deg;
+}
+
+.brain__close:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
 @media (max-width: 899px) {
+  .brain {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "title"
+      "body"
+      "media"
+      "panel";
+    min-height: 0;
+    padding: var(--pad-y) var(--gutter);
+  }
+
   .brain__media {
-    background: #1c1f23;
-    padding: 16px var(--gutter) 14px;
+    margin-top: 32px;
+  }
+
+  /* small screens: the intro stays and the card unfolds under the chips (0fr → 1fr row) */
+  .brain.is-open .brain__lede {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .brain__panel,
+  .brain.is-open .brain__panel {
+    grid-area: panel;
+    margin-top: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    clip-path: none;
+    transition: grid-template-rows .45s var(--ease), visibility 0s .45s;
+  }
+
+  .brain.is-open .brain__panel {
+    grid-template-rows: 1fr;
+    transition: grid-template-rows .55s var(--ease), visibility 0s;
+  }
+
+  .brain__clip {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .brain__figure {
-    position: relative;
-    right: auto;
-    top: auto;
-    width: min(100%, calc(36svh * 1.5));
+    width: min(100%, calc(50svh * 1.5));
     margin: 0 auto;
-    transform: none;
+  }
+
+  .brain__card {
+    width: 100%;
+    margin-top: 20px;
   }
 
   .hotspot__idle {
@@ -703,6 +888,11 @@
   .region {
     padding: 24px;
     gap: 14px;
+  }
+
+  .brain__close {
+    top: 12px;
+    right: 12px;
   }
 }
 
@@ -1191,10 +1381,15 @@ button.pill:hover {
 
 .resource__cover {
   width: 100%;
-  aspect-ratio: 384 / 260;
+  height: auto;
+  aspect-ratio: 1;
   object-fit: cover;
   border-radius: 8px;
   transition: translate .5s var(--ease), box-shadow .5s var(--ease);
+}
+
+.resource__cover--top {
+  object-position: 50% 0;
 }
 
 .resource:hover .resource__cover {
@@ -1327,7 +1522,8 @@ button.pill:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hotspot::before {
+  .hotspot::before,
+  .brain__hint::before {
     animation: none;
   }
 }

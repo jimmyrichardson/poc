@@ -23,8 +23,15 @@ initNav();
 initCover();
 initExpanders();
 
-// 03 · Connection is a need and 05 · Foundation: image holds, text changes
-document.querySelectorAll('[data-story]:not([data-brain]):not([data-cycle])').forEach((s) => createStory(s));
+// 03 · Connection is a need and 05 · Foundation: image holds, text changes.
+// Stories with [data-frame] images (05) crossfade to the frame matching the active step.
+document.querySelectorAll('[data-story]:not([data-brain]):not([data-cycle])').forEach((s) => {
+  const frames = [...s.querySelectorAll('[data-frame]')];
+  const onActive = frames.length
+    ? (i) => frames.forEach((f, j) => f.classList.toggle('is-active', j === Math.min(i, frames.length - 1)))
+    : undefined;
+  createStory(s, { onActive });
+});
 initScene();
 initBrain();
 initCycle();

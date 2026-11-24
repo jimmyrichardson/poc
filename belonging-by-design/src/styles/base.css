@@ -318,11 +318,3 @@ html.js [data-intro] {
     visibility: visible;
   }
 }
-
-/* SplitText line masks: give descenders and accents room so the mask doesn't clip them. */
-[data-split]>*,
-[data-intro-split]>*,
-[data-close-text]>* {
-  padding-block: .08em .16em;
-  margin-block: -.08em -.16em;
-}
