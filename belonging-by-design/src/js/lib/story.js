@@ -21,10 +21,14 @@ export function createStory(story, { onActive, onRender, fade = true } = {}) {
   const drift = reducedMotion() ? 0 : 48;
   let active = -1;
 
-  /** The part of the viewport the steps are read in: below the nav, or below the sticky media when stacked. */
+  /**
+   * The part of the viewport the steps are read in: below the nav, or below the sticky media when
+   * stacked. Scenes, the cycle and [data-overlay] stories scroll their text over full-stage media,
+   * so they read in the whole stage.
+   */
   const area = () => {
     const vh = window.innerHeight;
-    const top = isStacked() && media && !story.matches('[data-scene], [data-cycle]')
+    const top = isStacked() && media && !story.matches('[data-scene], [data-cycle], [data-overlay]')
       ? Math.max(navHeight(), media.getBoundingClientRect().bottom)
       : navHeight();
     return { top, bottom: vh, h: vh - top };

@@ -5,6 +5,8 @@
 :root {
   --nav-h: 64px;
   --gutter: clamp(20px, 8.3333vw, 120px);
+  /* the 1200px content column of the 1440 design; past 1440 it stays 1200 and centres */
+  --column-pad: max(var(--gutter), calc((100% - 1200px) / 2));
   --pad-y: clamp(72px, 8.3333vw, 120px);
   /* Sticky stages sit under the nav on desktop (the wireframe slides are 900 tall with the nav overlaid). */
   --stage-top: 0px;
@@ -317,4 +319,16 @@ html.js [data-intro] {
   html.js [data-intro] {
     visibility: visible;
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

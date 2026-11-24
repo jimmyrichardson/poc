@@ -120,30 +120,50 @@ export function initReveals() {
   });
 }
 
-/** 07 · Voices: the collage opens up from an inset frame, then the play buttons pop in. */
+/**
+ * 07 · Voices. Wide screens: the collage opens up from an inset frame, then the play buttons pop in.
+ * Small screens (under 700px, where the collage is swapped for full-width clips): each clip rises in
+ * as it arrives, then its play button pops.
+ *
+ * Each set is created only while its layout is showing (gsap.matchMedia). A trigger on a hidden
+ * element measures at the top of the page, so a `once` trigger there fires and kills itself during
+ * setup, which corrupts ScrollTrigger's list and makes the next trigger created on the page throw.
+ */
 export function initVoices() {
   const grid = document.querySelector('[data-voices]');
-  if (!grid) return;
+  if (!grid || !m()) return;
   const collage = grid.querySelector('.voices__collage');
   const plays = grid.querySelectorAll('.play');
-  if (!m()) return;
+  const clips = document.querySelectorAll('[data-voices-list] .voice');
 
-  gsap.fromTo(collage,
-    { clipPath: 'inset(10% 10% 10% 10% round 28px)', scale: 1.06 },
-    {
-      clipPath: 'inset(0% 0% 0% 0% round 0px)',
-      scale: 1,
-      ease: 'none',
-      scrollTrigger: { trigger: grid, start: 'top 90%', end: 'top 30%', scrub: 0.6 },
+  const mm = gsap.matchMedia();
+
+  mm.add('(min-width: 700px)', () => {
+    gsap.fromTo(collage,
+      { clipPath: 'inset(10% 10% 10% 10% round 28px)', scale: 1.06 },
+      {
+        clipPath: 'inset(0% 0% 0% 0% round 0px)',
+        scale: 1,
+        ease: 'none',
+        scrollTrigger: { trigger: grid, start: 'top 90%', end: 'top 30%', scrub: 0.6 },
+      });
+
+    gsap.from(plays, {
+      autoAlpha: 0,
+      scale: 0.4,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'back.out(2.2)',
+      scrollTrigger: { trigger: grid, start: 'top 45%', once: true },
     });
+  });
 
-  gsap.from(plays, {
-    autoAlpha: 0,
-    scale: 0.4,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'back.out(2.2)',
-    scrollTrigger: { trigger: grid, start: 'top 45%', once: true },
+  mm.add('(max-width: 699px)', () => {
+    clips.forEach((clip) => {
+      const tl = gsap.timeline({ scrollTrigger: { trigger: clip, start: 'top 88%', once: true } });
+      tl.from(clip, { autoAlpha: 0, y: 32, duration: 0.8, ease: 'power3.out' })
+        .from(clip.querySelector('.voice__play'), { autoAlpha: 0, scale: 0.4, duration: 0.7, ease: 'back.out(2.2)' }, 0.25);
+    });
   });
 }
 

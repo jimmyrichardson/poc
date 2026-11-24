@@ -13,7 +13,6 @@ export function initBrain() {
 
   const regions = [...section.querySelectorAll('[data-region]')];
   const controls = [...section.querySelectorAll('[data-hotspot]')];
-  const chips = [...section.querySelectorAll('.brain__legend [data-hotspot]')];
   const close = section.querySelector('.brain__close');
   let active = 0; // 0 = closed
 
@@ -31,13 +30,6 @@ export function initBrain() {
       r.classList.toggle('is-active', on);
       r.inert = !on;
     });
-
-    // keep the active chip centred in its row (scroll only the row, never the page)
-    const chip = chips[next - 1];
-    const row = chip?.parentElement;
-    if (row && row.scrollWidth > row.clientWidth) {
-      row.scrollTo({ left: chip.offsetLeft - (row.clientWidth - chip.offsetWidth) / 2, behavior: 'smooth' });
-    }
   };
 
   select(0);

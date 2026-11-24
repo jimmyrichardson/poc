@@ -65,15 +65,10 @@
   transform: scaleX(1);
 }
 
-.nav__current {
+/* Small screens: the current chapter doubles as the menu button */
+.nav__menu,
+.nav__scrim {
   display: none;
-  font-family: var(--sans);
-  font-weight: 500;
-  font-size: 14px;
-  opacity: .8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .nav__track {
@@ -93,12 +88,146 @@
 }
 
 @media (max-width: 1023px) {
-  .nav__chapters {
-    display: none;
+  .nav__menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    min-height: 44px;
+    margin-right: -10px;
+    padding: 0 10px 0 14px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
   }
 
   .nav__current {
+    opacity: .8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* two bars that cross into an × when open */
+  .nav__icon {
+    position: relative;
+    flex: none;
+    width: 18px;
+    height: 12px;
+  }
+
+  .nav__icon::before,
+  .nav__icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: translate .3s var(--ease), rotate .3s var(--ease);
+  }
+
+  .nav__icon::before {
+    top: 2px;
+  }
+
+  .nav__icon::after {
+    bottom: 2px;
+  }
+
+  .nav.is-open .nav__icon::before {
+    translate: 0 3px;
+    rotate: 45deg;
+  }
+
+  .nav.is-open .nav__icon::after {
+    translate: 0 -3px;
+    rotate: -45deg;
+  }
+
+  /* tapping the dimmed page closes the menu; touch-action stops it scrolling the page underneath */
+  .nav__scrim {
     display: block;
+    position: fixed;
+    inset: var(--nav-h) 0 0;
+    background: rgba(20, 8, 10, .55);
+    opacity: 0;
+    pointer-events: none;
+    touch-action: none;
+    transition: opacity .3s;
+  }
+
+  .nav.is-open .nav__scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* the chapter links become a panel that unfolds from under the bar */
+  .nav__chapters {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px var(--gutter) 28px;
+    background: var(--brick-deep);
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path .35s var(--ease), visibility 0s .35s;
+  }
+
+  .nav.is-open .nav__chapters {
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    transition: clip-path .45s var(--ease), visibility 0s;
+  }
+
+  .nav__chapters a {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 0;
+    border-bottom: 1px solid rgba(250, 248, 239, .12);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    opacity: 1;
+    transition: opacity .2s, translate .2s, color .3s;
+  }
+
+  /* closed: every link (the current one included) sits faded and raised, ready to stagger in */
+  .nav:not(.is-open) .nav__chapters a {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  .nav.is-open .nav__chapters a {
+    transition: opacity .4s calc(.06s + var(--i) * .04s), translate .5s var(--ease) calc(.06s + var(--i) * .04s), color .3s;
+  }
+
+  .nav__chapters a:nth-child(1) { --i: 0; }
+  .nav__chapters a:nth-child(2) { --i: 1; }
+  .nav__chapters a:nth-child(3) { --i: 2; }
+  .nav__chapters a:nth-child(4) { --i: 3; }
+  .nav__chapters a:nth-child(5) { --i: 4; }
+
+  /* current chapter: gold, with a short bar ahead of the name instead of the desktop underline */
+  .nav__chapters a[aria-current] {
+    color: var(--gold);
+  }
+
+  .nav__chapters a::after {
+    display: none;
+  }
+
+  .nav__chapters a[aria-current]::before {
+    content: '';
+    width: 14px;
+    height: 2px;
+    margin-right: 12px;
+    background: var(--gold);
   }
 }
 
@@ -250,7 +379,8 @@
 /* ---------- 03 · Connection is a need ---------- */
 
 .need {
-  background: #fefbf0;
+  --bg: #fefbf0;
+  background: var(--bg);
 }
 
 .need__art {
@@ -269,27 +399,27 @@
 }
 
 @media (max-width: 899px) {
+  /* the art file's own cream (#fffcef), so its opaque edges can't show against the stage */
   .need {
-    --media-h: 46svh;
+    --bg: #fffcef;
   }
 
-  .need__media {
-    height: var(--media-h);
-    background: #fefbf0;
-  }
-
+  /* Bottom-anchored like desktop, sized so the silhouette spans ~82vw (the panels cover its right side
+     as they pass). It starts 31.3% into the 1516×1038 file (0.4576 × height), so this lines its left
+     edge up with the gutter. */
   .need__art {
+    --art-h: min(calc(var(--stage-h) * .86), 150vw);
     right: auto;
-    left: 50%;
-    height: 100%;
-    transform: translateX(-50%);
+    height: var(--art-h);
+    left: calc(var(--gutter) - var(--art-h) * .4576);
   }
 }
 
 /* ---------- 05 · Foundation ---------- */
 
 .foundation {
-  background: #fbf3e7;
+  --bg: #fbf3e7;
+  background: var(--bg);
 }
 
 /* Figma: 640px square at x 740 of 1440, inset 60px from the right; capped by the stage height.
@@ -327,21 +457,62 @@
 }
 
 @media (max-width: 899px) {
-  .foundation {
-    --media-h: min(300px, 40svh);
-  }
-
-  .foundation__media {
-    height: var(--media-h);
-    background: #fbf3e7;
-  }
-
-  /* the art has generous margin around the circle, so it can fill the band edge to edge */
+  /* the circle starts ~12% into each frame: pull the frame left so the circle meets the gutter */
   .foundation__art {
+    --art-w: min(100vw, calc(var(--stage-h) * .7));
     right: auto;
-    left: 50%;
-    width: var(--media-h);
-    transform: translate(-50%, -50%);
+    left: calc(var(--gutter) - var(--art-w) * .12);
+    width: var(--art-w);
+  }
+}
+
+/* ---------- Small-screen overlay stories (03, 05) ----------
+   Instead of a pinned band above the text, the art pins across the whole stage, aligned left, and
+   the text scrolls over it in right-aligned, opaque panels of the section colour. */
+
+@media (max-width: 899px) {
+  .story[data-overlay] {
+    display: grid;
+  }
+
+  .story[data-overlay]>.story__media,
+  .story[data-overlay]>.story__steps {
+    grid-area: 1 / 1;
+  }
+
+  .story[data-overlay]>.story__media {
+    z-index: 0;
+    align-self: start;
+    height: var(--stage-h);
+  }
+
+  .story[data-overlay]>.story__steps {
+    padding: 0;
+  }
+
+  .story[data-overlay] .story__step,
+  .story[data-overlay] .story__step:last-child {
+    justify-content: flex-end;
+    min-height: 70svh;
+    padding: 0;
+  }
+
+  /* the first text arrives with the section and the last leaves with it, centred on the stage */
+  .story[data-overlay] .story__step:first-child,
+  .story[data-overlay] .story__step:last-child {
+    min-height: var(--stage-h);
+  }
+
+  .story[data-overlay] .story__content {
+    width: min(74%, 420px);
+    padding: 28px var(--gutter) 28px 28px;
+    font-size: var(--fs-h4);
+    background: var(--bg);
+  }
+
+  /* body-size copy (the 05a "See more" panel) keeps its own size */
+  .story[data-overlay] .story__content .t-h3 {
+    font-size: var(--fs-h4);
   }
 }
 
@@ -488,6 +659,86 @@
 
 .play:focus-visible {
   outline-offset: 4px;
+}
+
+/* Small screens: the collage's clips become full-width 16:9 video frames, one per row, inside the
+   gutters and rounded like the collage's tiles.
+   FPO frames (tinted with the collage's tile colours) stand in until the clips are delivered. */
+.voices__list {
+  display: none;
+}
+
+@media (max-width: 699px) {
+  .voices__grid {
+    display: none;
+  }
+
+  .voices__list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .voice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .voice__frame {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    background: var(--c);
+    overflow: hidden;
+  }
+
+  .voice__tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(63, 24, 28, .55);
+    color: #fff;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .voice__play {
+    width: 64px;
+    height: 64px;
+    transition: scale .4s var(--ease);
+  }
+
+  .voice:active .voice__play {
+    scale: .92;
+  }
+
+  .voice:focus-visible {
+    outline-offset: 4px;
+    border-radius: 16px;
+  }
+
+  .voice__caption {
+    padding: 0;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
 }
 
 /* ==========================================================================
@@ -839,17 +1090,12 @@
     height: 32px;
   }
 
+  /* all five regions visible at once: the pills wrap onto a second line instead of side-scrolling */
   .brain__legend {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     margin-top: 12px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 2px;
-  }
-
-  .brain__legend::-webkit-scrollbar {
-    display: none;
   }
 
   .brain__legend button {
@@ -860,7 +1106,7 @@
     min-height: 40px;
     padding: 0 14px;
     border-radius: 999px;
-    border: 1.5px solid rgba(255, 255, 255, .22);
+    border: 1.5px solid var(--c);
     font-family: var(--sans);
     font-weight: 600;
     font-size: 14px;
@@ -904,7 +1150,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(36px, 3.8889vw, 56px);
-  padding: var(--pad-y) var(--gutter);
+  padding: var(--pad-y) var(--column-pad);
   background: #090909;
   color: #fff;
 }
@@ -1353,7 +1599,7 @@ button.pill:hover {
   display: flex;
   flex-direction: column;
   gap: 48px;
-  padding: 0 var(--gutter);
+  padding: 0 var(--column-pad);
 }
 
 .next a.hl {
@@ -1522,6 +1768,15 @@ button.pill:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+  .nav__chapters,
+  .nav__chapters a,
+  .nav__scrim,
+  .nav__icon::before,
+  .nav__icon::after {
+    transition: none !important;
+  }
+
   .hotspot::before,
   .brain__hint::before {
     animation: none;

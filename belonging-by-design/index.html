@@ -20,14 +20,20 @@
 <body>
   <header class="nav">
     <a class="nav__title" href="#top">Belonging by Design</a>
-    <nav class="nav__chapters" aria-label="Chapters">
+    <!-- Below 1024px the chapter links fold into a flyout; the button shows the current chapter -->
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-chapters">
+      <span class="visually-hidden">Chapters menu, current chapter:</span>
+      <span class="nav__current">Menu</span>
+      <span class="nav__icon" aria-hidden="true"></span>
+    </button>
+    <div class="nav__scrim" aria-hidden="true"></div>
+    <nav class="nav__chapters" id="nav-chapters" aria-label="Chapters">
       <a href="#connection" data-chapter-link="connection">Connection</a>
       <a href="#neighborhoods" data-chapter-link="neighborhoods">Neighborhoods</a>
       <a href="#science" data-chapter-link="science">The Science</a>
       <a href="#benefits" data-chapter-link="benefits">Benefits</a>
       <a href="#designing" data-chapter-link="designing">Designing for Belonging</a>
     </nav>
-    <p class="nav__current" aria-hidden="true"></p>
     <div class="nav__track" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"
       aria-valuenow="0">
       <div class="nav__progress"></div>
@@ -79,7 +85,7 @@
     </section>
 
     <!-- 03 · Connection is a need · image stays, text changes -->
-    <section class="story need" data-story data-chapter="connection">
+    <section class="story need" data-story data-overlay data-chapter="connection">
       <div class="story__media need__media">
         <img class="need__art" src="./images/connection-illustration.webp" width="1516" height="1038"
           alt="Silhouette of a person filled with scenes of friendship, home, family, food, water and sleep">
@@ -99,7 +105,7 @@
     </section>
 
     <!-- 05 · Foundation · one illustration per step; they crossfade inside the circle as the steps scroll -->
-    <section class="story foundation" data-story data-chapter="connection">
+    <section class="story foundation" data-story data-overlay data-chapter="connection">
       <div class="story__media foundation__media">
         <div class="foundation__art">
           <img class="is-active" src="./images/foundation-1.webp" width="1280" height="1280" loading="lazy"
@@ -249,6 +255,45 @@
         <button class="play" type="button" style="--x:72%;--y:71.7%" data-clip="Family"
           aria-label="Play clip: family"><img src="./images/play-button.svg" width="88" height="88" alt=""></button>
       </div>
+      <!-- Small screens: the collage's four clips as full-width video frames (FPO stills until the clips land) -->
+      <ul class="voices__list" role="list" data-voices-list>
+        <li>
+          <button class="voice" type="button" style="--c:#f6b85a" data-clip="Woman, top right" aria-label="Play clip 1">
+            <span class="voice__frame">
+              <span class="voice__tag">FPO · Video still</span>
+              <img class="voice__play" src="./images/play-button.svg" width="88" height="88" alt="">
+            </span>
+            <span class="voice__caption">Clip 1 · Speaker TBD</span>
+          </button>
+        </li>
+        <li>
+          <button class="voice" type="button" style="--c:#fdd9a8" data-clip="Doctor" aria-label="Play clip 2">
+            <span class="voice__frame">
+              <span class="voice__tag">FPO · Video still</span>
+              <img class="voice__play" src="./images/play-button.svg" width="88" height="88" alt="">
+            </span>
+            <span class="voice__caption">Clip 2 · Speaker TBD</span>
+          </button>
+        </li>
+        <li>
+          <button class="voice" type="button" style="--c:#c98a17" data-clip="Woman, left" aria-label="Play clip 3">
+            <span class="voice__frame">
+              <span class="voice__tag">FPO · Video still</span>
+              <img class="voice__play" src="./images/play-button.svg" width="88" height="88" alt="">
+            </span>
+            <span class="voice__caption">Clip 3 · Speaker TBD</span>
+          </button>
+        </li>
+        <li>
+          <button class="voice" type="button" style="--c:#b57cf6" data-clip="Family" aria-label="Play clip 4">
+            <span class="voice__frame">
+              <span class="voice__tag">FPO · Video still</span>
+              <img class="voice__play" src="./images/play-button.svg" width="88" height="88" alt="">
+            </span>
+            <span class="voice__caption">Clip 4 · Speaker TBD</span>
+          </button>
+        </li>
+      </ul>
       <p class="t-h2 w center" style="--w:996" data-split>As it turns out, belonging isn't just a feeling.</p>
     </section>
 
@@ -288,7 +333,6 @@
         <p class="t-h5">The brain signals us to eat, drink, rest, and <span class="hl hl--blue">connect with
             others</span> when we need it.</p>
         <p class="t-h5">When we lack social connection, it activates the same brain regions as physical pain.</p>
-        <p class="brain__hint">Select a region to explore it.</p>
       </div>
       <div class="brain__media">
         <div class="brain__figure">
